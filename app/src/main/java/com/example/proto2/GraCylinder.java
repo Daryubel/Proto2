@@ -13,16 +13,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GraStairs extends AppCompatActivity implements View.OnClickListener{
+public class GraCylinder extends AppCompatActivity implements View.OnClickListener{
 
     private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
 
-    TextView tv_central, tv_length, barprogress, fieldLength;;
-    EditText value_o_height,value_o_density,value_o_Depth;
+    TextView tv_peak, tv_length, barprogress, fieldLength;;
+    EditText value_o_radius,value_o_density,value_o_Depth;
     Button calBtn5, calBtn6;
     Context mContext;
     SeekBar seekBar, lengthBar;
-    Double height, density, depth;
+    Double radius, density, depth;
     Integer length;
 
 
@@ -37,12 +37,12 @@ public class GraStairs extends AppCompatActivity implements View.OnClickListener
         calBtn5=(Button)this.findViewById(R.id.calButton5);
         calBtn6=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_height=(EditText)this.findViewById(R.id.Textinput_o_radius);
+        value_o_radius=(EditText)this.findViewById(R.id.Textinput_o_radius);
         value_o_density=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 
         tv_length=(TextView)this.findViewById(R.id.textView4);
-        tv_central=(TextView)this.findViewById(R.id.textView6);
+        tv_peak=(TextView)this.findViewById(R.id.textView6);
         barprogress=(TextView)this.findViewById(R.id.textView7);
         fieldLength=(TextView)this.findViewById(R.id.textView8);
 
@@ -57,7 +57,7 @@ public class GraStairs extends AppCompatActivity implements View.OnClickListener
         calBtn5.setOnClickListener((View.OnClickListener) this);
         calBtn6.setOnClickListener((View.OnClickListener) this);
 
-        mContext = GraStairs.this;
+        mContext = GraCylinder.this;
 
         barTracking();
 
@@ -131,33 +131,33 @@ public class GraStairs extends AppCompatActivity implements View.OnClickListener
     //Functions that are called by click
     public void calculate()
     {
-        String inputText1=value_o_height.getText().toString();  //Convert
+        String inputText1=value_o_radius.getText().toString();  //Convert
         String inputText2=value_o_density.getText().toString();
         String inputText3=value_o_Depth.getText().toString();
-        Double out_o_central;
+        Double out_o_peak;
         String Peak;
 
-        height=Double.valueOf(inputText1);
+        radius=Double.valueOf(inputText1);
         density=Double.valueOf(inputText2);
         depth=Double.valueOf(inputText3);
 
-        out_o_central=pi*G*density*height;
+        out_o_peak=2*G*density*pi*Math.pow(radius,2)/depth;
 
-        Peak=String.valueOf(out_o_central);   //Convert integer to String. Works for all types of values.
-        tv_central.setText(Peak);
+        Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
+        tv_peak.setText(Peak);
         Toast.makeText(mContext, "Calculation Complete", Toast.LENGTH_SHORT).show();
     }
 
     public void DrawGraph()
     {
         calculate();
-        Intent gra_graph = new Intent(GraStairs.this, Gra_graph_stairs.class);
+        Intent gra_graph = new Intent(GraCylinder.this, Gra_graph_cylinder.class);
 
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
         gra_graph.putExtra("xLength", String.valueOf(length));
-        gra_graph.putExtra("height", String.valueOf(height));
+        gra_graph.putExtra("radius", String.valueOf(radius));
         gra_graph.putExtra("density", String.valueOf(density));
         gra_graph.putExtra("depth", String.valueOf(depth));
 

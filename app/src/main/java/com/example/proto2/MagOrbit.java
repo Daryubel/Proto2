@@ -37,7 +37,7 @@ public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
         calBtn3=(Button)this.findViewById(R.id.calButton5);
         calBtn4=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_height);
+        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_radius);
         value_o_magnetization=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 

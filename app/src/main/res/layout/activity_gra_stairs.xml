@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gra">
+    tools:context=".GraStairs">
 
     <Button
         android:id="@+id/calButton5"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.533" />
 
     <EditText
-        android:id="@+id/Textinput_o_height"
+        android:id="@+id/Textinput_o_radius"
         android:layout_width="213dp"
         android:layout_height="34dp"
         android:layout_marginTop="108dp"
@@ -74,7 +74,7 @@
         android:text="2"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_height" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_radius" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -118,10 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:text="Height:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_height"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_height"
+        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_radius"
+        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_radius"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_height"
+        app:layout_constraintTop_toTopOf="@+id/Textinput_o_radius"
         app:layout_constraintVertical_bias="0.8" />
 
     <TextView
