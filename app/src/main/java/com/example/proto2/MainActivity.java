@@ -35,11 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /**
-         * 此方法用于初始化菜单，其中menu参数就是即将要显示的Menu实例。 返回true则显示该menu,false 则不显示;
-         * (只会在第一次初始化菜单时调用) Inflate the menu; this adds items to the action bar
-         * if it is present.
-         */
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate( R.menu.main , menu);
         return true;
@@ -47,15 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /**
-         * 菜单项被点击时调用，也就是菜单项的监听方法。
-         * 通过这几个方法，可以得知，对于Activity，同一时间只能显示和监听一个Menu 对象。
-         * method stub
-         */
         super.onOptionsItemSelected(item);
-        switch(item.getItemId()) //得到被点击的item的itemId
+        switch(item.getItemId())
         {
-            case  R.id.add_item :  //对应的ID就是在add方法中所设定的Id
+            case  R.id.add_item :
                 Toast.makeText(this, "1st item clicked", Toast.LENGTH_SHORT).show();
                 break;
             case  R.id.remove_item :
@@ -103,9 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setTitle("About this app");
         builder.setMessage("Proto app v0.1 by DarYubel");
 //        builder.setIcon(R.mipmap.ic_launcher);
-        builder.setCancelable(true);            //点击对话框以外的区域是否让对话框消失
-
-        //设置正面按钮
+        builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
