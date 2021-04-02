@@ -35,7 +35,7 @@ public class mag_graph1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gra_graph1);
+        setContentView(R.layout.activity_mag_graph1);
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
