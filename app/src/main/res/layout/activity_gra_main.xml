@@ -7,20 +7,20 @@
     tools:context=".GraMain">
 
     <Button
-        android:id="@+id/calButton"
+        android:id="@+id/calButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="69dp"
         android:layout_marginEnd="44dp"
         android:text="Calculate"
-        app:layout_constraintBottom_toBottomOf="@+id/calButton2"
-        app:layout_constraintEnd_toStartOf="@+id/calButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/calButton4"
+        app:layout_constraintEnd_toStartOf="@+id/calButton4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calButton2"
+        app:layout_constraintTop_toTopOf="@+id/calButton4"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/calButton2"
+        android:id="@+id/calButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="91dp"

@@ -34,8 +34,8 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_gra_main);
         Log.d("MainActivity","onCreate execute");
 
-        calBtn=(Button)this.findViewById(R.id.calButton);
-        calBtn2=(Button)this.findViewById(R.id.calButton2);
+        calBtn=(Button)this.findViewById(R.id.calButton3);
+        calBtn2=(Button)this.findViewById(R.id.calButton4);
 
         value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_Radius);
         value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_magnetization);
@@ -110,10 +110,10 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.calButton:
+            case R.id.calButton3:
                 calculate();           // Show some vital values
                 break;
-            case R.id.calButton2:
+            case R.id.calButton4:
                 graGraph1();       // Show the charts
                 break;
 //            case R.id.btn_multi_choice:
