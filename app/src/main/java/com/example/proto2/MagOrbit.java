@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
 
-    private Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
 
     TextView tv_peak, tv_length, barprogress, fieldLength;;
     EditText value_o_Radius,value_o_magnetization,value_o_Depth;
@@ -34,11 +34,11 @@ public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_mag_orbit);
         Log.d("MainActivity","onCreate execute");
 
-        calBtn3=(Button)this.findViewById(R.id.calButton3);
-        calBtn4=(Button)this.findViewById(R.id.calButton4);
+        calBtn3=(Button)this.findViewById(R.id.calButton5);
+        calBtn4=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_Radius);
-        value_o_magnetization=(EditText)this.findViewById(R.id.Textinput_o_magnetization);
+        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_height);
+        value_o_magnetization=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 
         tv_length=(TextView)this.findViewById(R.id.textView4);
@@ -110,11 +110,11 @@ public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.calButton3:
+            case R.id.calButton5:
                 calculate();           // Show some vital values
                 break;
-            case R.id.calButton4:
-                graGraph1();       // Show the charts
+            case R.id.calButton6:
+                DrawGraph();       // Show the charts
                 break;
 //            case R.id.btn_multi_choice:
 //                multiChoiceDialog();        //多选对话框
@@ -148,20 +148,20 @@ public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
         Toast.makeText(mContext, "Calculation Complete", Toast.LENGTH_SHORT).show();
     }
 
-    public void graGraph1()
+    public void DrawGraph()
     {
         calculate();
-        Intent mag_graph1 = new Intent(MagOrbit.this, mag_graph_orbit.class);
+        Intent mag_graph = new Intent(MagOrbit.this, Mag_graph_orbit.class);
 
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        mag_graph1.putExtra("xLength", String.valueOf(length));
-        mag_graph1.putExtra("radius", String.valueOf(radius));
-        mag_graph1.putExtra("magnetization", String.valueOf(magnetization));
-        mag_graph1.putExtra("depth", String.valueOf(depth));
+        mag_graph.putExtra("xLength", String.valueOf(length));
+        mag_graph.putExtra("radius", String.valueOf(radius));
+        mag_graph.putExtra("magnetization", String.valueOf(magnetization));
+        mag_graph.putExtra("depth", String.valueOf(depth));
 
-        startActivity(mag_graph1);
+        startActivity(mag_graph);
     }
 
 

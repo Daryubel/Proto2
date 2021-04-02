@@ -13,16 +13,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GraOrbit extends AppCompatActivity implements View.OnClickListener{
+public class GraStairs extends AppCompatActivity implements View.OnClickListener{
 
-    private Double G = 6.67259*10, pi = 3.14159;
+    private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
 
-    TextView tv_peak, tv_length, barprogress, fieldLength;;
-    EditText value_o_Radius,value_o_Density,value_o_Depth;
-    Button calBtn, calBtn2;
+    TextView tv_central, tv_length, barprogress, fieldLength;;
+    EditText value_o_height,value_o_density,value_o_Depth;
+    Button calBtn5, calBtn6;
     Context mContext;
     SeekBar seekBar, lengthBar;
-    Double radius, density, depth;
+    Double height, density, depth;
     Integer length;
 
 
@@ -31,18 +31,18 @@ public class GraOrbit extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gra_orbit);
+        setContentView(R.layout.activity_gra_stairs);
         Log.d("MainActivity","onCreate execute");
 
-        calBtn=(Button)this.findViewById(R.id.calButton5);
-        calBtn2=(Button)this.findViewById(R.id.calButton6);
+        calBtn5=(Button)this.findViewById(R.id.calButton5);
+        calBtn6=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_height);
-        value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_density);
+        value_o_height=(EditText)this.findViewById(R.id.Textinput_o_height);
+        value_o_density=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 
         tv_length=(TextView)this.findViewById(R.id.textView4);
-        tv_peak=(TextView)this.findViewById(R.id.textView6);
+        tv_central=(TextView)this.findViewById(R.id.textView6);
         barprogress=(TextView)this.findViewById(R.id.textView7);
         fieldLength=(TextView)this.findViewById(R.id.textView8);
 
@@ -54,10 +54,10 @@ public class GraOrbit extends AppCompatActivity implements View.OnClickListener{
         lengthBar.setMin(50);
         lengthBar.setMax(500);
 
-        calBtn.setOnClickListener((View.OnClickListener) this);
-        calBtn2.setOnClickListener((View.OnClickListener) this);
+        calBtn5.setOnClickListener((View.OnClickListener) this);
+        calBtn6.setOnClickListener((View.OnClickListener) this);
 
-        mContext = GraOrbit.this;
+        mContext = GraStairs.this;
 
         barTracking();
 
@@ -131,40 +131,38 @@ public class GraOrbit extends AppCompatActivity implements View.OnClickListener{
     //Functions that are called by click
     public void calculate()
     {
-        String inputText1=value_o_Radius.getText().toString();  //Convert
-        String inputText2=value_o_Density.getText().toString();
+        String inputText1=value_o_height.getText().toString();  //Convert
+        String inputText2=value_o_density.getText().toString();
         String inputText3=value_o_Depth.getText().toString();
-        Double out_o_peak;
+        Double out_o_central;
         String Peak;
 
-        radius=Double.valueOf(inputText1);
+        height=Double.valueOf(inputText1);
         density=Double.valueOf(inputText2);
         depth=Double.valueOf(inputText3);
 
-        out_o_peak=(4/3)*pi*radius*radius*radius*density*G/(depth*depth);
+        out_o_central=pi*G*density*height;
 
-        Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
-        tv_peak.setText(Peak);
+        Peak=String.valueOf(out_o_central);   //Convert integer to String. Works for all types of values.
+        tv_central.setText(Peak);
         Toast.makeText(mContext, "Calculation Complete", Toast.LENGTH_SHORT).show();
     }
 
     public void DrawGraph()
     {
         calculate();
-        Intent Gra_graph = new Intent(GraOrbit.this, Gra_graph_orbit.class);
+        Intent gra_graph = new Intent(GraStairs.this, Gra_graph_stairs.class);
 
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        Gra_graph.putExtra("xLength", String.valueOf(length));
-        Gra_graph.putExtra("radius", String.valueOf(radius));
-        Gra_graph.putExtra("density", String.valueOf(density));
-        Gra_graph.putExtra("depth", String.valueOf(depth));
+        gra_graph.putExtra("xLength", String.valueOf(length));
+        gra_graph.putExtra("height", String.valueOf(height));
+        gra_graph.putExtra("density", String.valueOf(density));
+        gra_graph.putExtra("depth", String.valueOf(depth));
 
-        startActivity(Gra_graph);
+        startActivity(gra_graph);
     }
 
 
 }
-
-
