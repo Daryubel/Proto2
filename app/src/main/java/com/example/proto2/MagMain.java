@@ -31,7 +31,7 @@ public class MagMain extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gra_main);
+        setContentView(R.layout.activity_mag_main);
         Log.d("MainActivity","onCreate execute");
 
         calBtn3=(Button)this.findViewById(R.id.calButton3);
