@@ -13,16 +13,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GraMain extends AppCompatActivity implements View.OnClickListener{
+public class MagOrbit extends AppCompatActivity implements View.OnClickListener{
 
-    private Double G = 6.67259*10, pi = 3.14159;
+    private Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
 
     TextView tv_peak, tv_length, barprogress, fieldLength;;
-    EditText value_o_Radius,value_o_Density,value_o_Depth;
-    Button calBtn, calBtn2;
+    EditText value_o_Radius,value_o_magnetization,value_o_Depth;
+    Button calBtn3, calBtn4;
     Context mContext;
     SeekBar seekBar, lengthBar;
-    Double radius, density, depth;
+    Double radius, magnetization, depth;
     Integer length;
 
 
@@ -31,14 +31,14 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gra_main);
+        setContentView(R.layout.activity_mag_orbit);
         Log.d("MainActivity","onCreate execute");
 
-        calBtn=(Button)this.findViewById(R.id.calButton3);
-        calBtn2=(Button)this.findViewById(R.id.calButton4);
+        calBtn3=(Button)this.findViewById(R.id.calButton3);
+        calBtn4=(Button)this.findViewById(R.id.calButton4);
 
         value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_Radius);
-        value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_magnetization);
+        value_o_magnetization=(EditText)this.findViewById(R.id.Textinput_o_magnetization);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 
         tv_length=(TextView)this.findViewById(R.id.textView4);
@@ -54,10 +54,10 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
         lengthBar.setMin(50);
         lengthBar.setMax(500);
 
-        calBtn.setOnClickListener((View.OnClickListener) this);
-        calBtn2.setOnClickListener((View.OnClickListener) this);
+        calBtn3.setOnClickListener((View.OnClickListener) this);
+        calBtn4.setOnClickListener((View.OnClickListener) this);
 
-        mContext = GraMain.this;
+        mContext = MagOrbit.this;
 
         barTracking();
 
@@ -132,16 +132,16 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
     public void calculate()
     {
         String inputText1=value_o_Radius.getText().toString();  //Convert
-        String inputText2=value_o_Density.getText().toString();
+        String inputText2=value_o_magnetization.getText().toString();
         String inputText3=value_o_Depth.getText().toString();
         Double out_o_peak;
         String Peak;
 
         radius=Double.valueOf(inputText1);
-        density=Double.valueOf(inputText2);
+        magnetization=Double.valueOf(inputText2);
         depth=Double.valueOf(inputText3);
 
-        out_o_peak=(4/3)*pi*radius*radius*radius*density*G/(depth*depth);
+        out_o_peak=(4/3)*pi*radius*radius*radius*magnetization*G/(depth*depth);
 
         Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
         tv_peak.setText(Peak);
@@ -151,20 +151,18 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
     public void graGraph1()
     {
         calculate();
-        Intent GraGraph1 = new Intent(GraMain.this, GraGraph1.class);
+        Intent mag_graph1 = new Intent(MagOrbit.this, mag_graph_orbit.class);
 
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        GraGraph1.putExtra("xLength", String.valueOf(length));
-        GraGraph1.putExtra("radius", String.valueOf(radius));
-        GraGraph1.putExtra("density", String.valueOf(density));
-        GraGraph1.putExtra("depth", String.valueOf(depth));
+        mag_graph1.putExtra("xLength", String.valueOf(length));
+        mag_graph1.putExtra("radius", String.valueOf(radius));
+        mag_graph1.putExtra("magnetization", String.valueOf(magnetization));
+        mag_graph1.putExtra("depth", String.valueOf(depth));
 
-        startActivity(GraGraph1);
+        startActivity(mag_graph1);
     }
 
 
 }
-
-
