@@ -38,7 +38,7 @@
         android:text="15"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Density" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_magnetization" />
 
     <TextView
         android:id="@+id/textView2"
@@ -47,10 +47,10 @@
         android:layout_marginStart="62dp"
         android:layout_marginEnd="4dp"
         android:text="Density:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_Density"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_Density"
+        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_magnetization"
+        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_magnetization"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_Density"
+        app:layout_constraintTop_toTopOf="@+id/Textinput_o_magnetization"
         app:layout_constraintVertical_bias="0.266" />
 
     <EditText
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Textinput_o_Density"
+        android:id="@+id/Textinput_o_magnetization"
         android:layout_width="213dp"
         android:layout_height="34dp"
         android:layout_marginTop="16dp"

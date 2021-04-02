@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/luxun"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proto2">
-        <activity android:name=".GraGraph1"></activity>
+        <activity android:name=".mag_graph1"></activity>
+        <activity android:name=".GraGraph1" />
         <activity android:name=".MagMain" />
         <activity android:name=".GraMain" />
         <activity android:name=".MainActivity">

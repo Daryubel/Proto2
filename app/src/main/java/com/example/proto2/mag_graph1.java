@@ -4,33 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class GraGraph1 extends AppCompatActivity {
+public class mag_graph1 extends AppCompatActivity {
 
-    private Double G = 6.67259*10, pi = 3.14159;
 
-    Double radius, density, depth;
+    private Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+
+    Double radius, magnetization, depth;
     TextView xV, rV, rhoV, DV;
     Integer length;
     LineChart OrbProfile;
 
     int[] x= null;
-    float[] g = null;
-    List<Entry> deltaG = new ArrayList<Entry>();
+    float[] ha = null;
+    List<Entry> deltaHa = new ArrayList<Entry>();
+    float[] za = null;
+    List<Entry> deltaZa = new ArrayList<Entry>();
+
 
 
     @Override
@@ -42,7 +41,7 @@ public class GraGraph1 extends AppCompatActivity {
         //should be converted into intended type before utilized.
         length = Integer.valueOf(getIntent().getStringExtra("xLength"));
         radius = Double.valueOf(getIntent().getStringExtra("radius"));
-        density = Double.valueOf(getIntent().getStringExtra("density"));
+        magnetization = Double.valueOf(getIntent().getStringExtra("density"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
         xV=(TextView)this.findViewById(R.id.textView9);
@@ -55,7 +54,7 @@ public class GraGraph1 extends AppCompatActivity {
 
         xV.setText("x length:" + length);
         rV.setText("radius:" + String.valueOf(radius));
-        rhoV.setText("density:" + String.valueOf(density));
+        rhoV.setText("magnetization:" + String.valueOf(magnetization));
         DV.setText("depth:" + String.valueOf(depth));
 
         x = new int[length];
@@ -63,10 +62,10 @@ public class GraGraph1 extends AppCompatActivity {
             x[i] = -length/2 + i;
         }
 
-        g = new float[length];
+        ha = new float[length];
         for (int i=0; i<length; i++){
-            g[i] = (float) ((G*depth*4*pi*Math.pow(radius,3)/3)
-                                        /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 1.5));
+            ha[i] = (float) ((G*depth*4*pi*Math.pow(radius,3)/3)
+                    /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 1.5));
         }
 
 
@@ -79,11 +78,11 @@ public class GraGraph1 extends AppCompatActivity {
     public void DrawProfile(){
 
         for (int i=0; i<length; i++){
-            deltaG.add(new Entry(x[i], g[i]));
+            deltaHa.add(new Entry(x[i], ha[i]));
         }
 
         // 2. 创建一个数据集 DataSet ，用来添加 Entry。一个图中可以包含多个数据集
-        LineDataSet set1 = new LineDataSet(deltaG, "DataSet 1");
+        LineDataSet set1 = new LineDataSet(deltaHa, "DataSet 1");
 
         // 3. 通过数据集设置数据的样式，如字体颜色、线型、线型颜色、填充色、线宽等属性
         // draw dashed line

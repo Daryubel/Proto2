@@ -1,11 +1,6 @@
 package com.example.proto2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,15 +13,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class GraMain extends AppCompatActivity implements View.OnClickListener{
 
-    Double G = 6.67259*10, pi = 3.14159;
+    private Double G = 6.67259*10, pi = 3.14159;
 
     TextView tv_peak, tv_length, barprogress, fieldLength;;
     EditText value_o_Radius,value_o_Density,value_o_Depth;
@@ -49,7 +38,7 @@ public class GraMain extends AppCompatActivity implements View.OnClickListener{
         calBtn2=(Button)this.findViewById(R.id.calButton2);
 
         value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_Radius);
-        value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_Density);
+        value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_magnetization);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 
         tv_length=(TextView)this.findViewById(R.id.textView4);
