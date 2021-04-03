@@ -87,7 +87,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
         // 3. 通过数据集设置数据的样式，如字体颜色、线型、线型颜色、填充色、线宽等属性
         // draw dashed line
-        set1.enableDashedLine(10f, 5f, 0f);
+//        set1.enableDashedLine(10f, 5f, 0f);
 
         // black lines and points
         set1.setColor(Color.BLACK);
@@ -95,7 +95,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
         // line thickness and point size
         set1.setLineWidth(1f);
-        set1.setCircleRadius(3f);
+        set1.setCircleRadius(1f);
 
         // draw points as solid circles
         set1.setDrawCircleHole(false);

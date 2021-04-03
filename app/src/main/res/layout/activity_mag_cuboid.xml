@@ -35,7 +35,7 @@
         android:layout_height="34dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="80dp"
-        android:text="15"
+        android:text="5"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Textinput_o_density" />

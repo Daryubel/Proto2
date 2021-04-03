@@ -47,8 +47,8 @@ public class MagCuboid extends AppCompatActivity implements View.OnClickListener
         fieldLength=(TextView)this.findViewById(R.id.textView8);
 
         seekBar = (SeekBar)this.findViewById(R.id.seekBar1);
-        seekBar.setMin(10);
-        seekBar.setMax(100);
+        seekBar.setMin(1);
+        seekBar.setMax(30);
 
         lengthBar = (SeekBar)this.findViewById(R.id.seekBar2);
         lengthBar.setMin(50);
@@ -72,7 +72,7 @@ public class MagCuboid extends AppCompatActivity implements View.OnClickListener
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                barprogress.setText("Depth: " + progress + "/100 ");
+                barprogress.setText("Depth: " + progress + "/30 ");
                 value_o_Depth.setText(String.valueOf(progress));
             }
 
@@ -90,7 +90,7 @@ public class MagCuboid extends AppCompatActivity implements View.OnClickListener
         lengthBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar lengthBar, int progress, boolean fromUser) {
-                fieldLength.setText("Length: " + progress + "/50 ");
+                fieldLength.setText("Length: " + progress + "/500 ");
                 tv_length.setText(String.valueOf(progress));
                 length=Integer.valueOf(progress);
             }

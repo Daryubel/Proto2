@@ -90,7 +90,7 @@ public class GraStairs extends AppCompatActivity implements View.OnClickListener
         lengthBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar lengthBar, int progress, boolean fromUser) {
-                fieldLength.setText("Length: " + progress + "/50 ");
+                fieldLength.setText("Length: " + progress + "/500 ");
                 tv_length.setText(String.valueOf(progress));
                 length=Integer.valueOf(progress);
             }
