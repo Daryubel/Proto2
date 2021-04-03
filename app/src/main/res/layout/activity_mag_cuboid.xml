@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GraOrbit">
+    tools:context=".MagCuboid">
 
     <Button
         android:id="@+id/calButton5"
@@ -46,12 +46,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginEnd="4dp"
-        android:text="Density:"
+        android:text="Magnetization: "
         app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_density"
         app:layout_constraintEnd_toStartOf="@+id/Textinput_o_density"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Textinput_o_density"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintVertical_bias="0.533" />
 
     <EditText
         android:id="@+id/Textinput_o_width"
@@ -70,7 +71,7 @@
         android:layout_height="34dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="80dp"
-        android:text="2"
+        android:text="20"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Textinput_o_width" />
@@ -116,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
-        android:text="Radius:"
+        android:text="Width:"
         app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_width"
         app:layout_constraintEnd_toStartOf="@+id/Textinput_o_width"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,12 +130,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="11dp"
-        android:text="the peak gravity value is:"
+        android:text="the central magnetization value is:"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"

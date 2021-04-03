@@ -37,7 +37,7 @@ public class GraOrbit extends AppCompatActivity implements View.OnClickListener{
         calBtn=(Button)this.findViewById(R.id.calButton5);
         calBtn2=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_radius);
+        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_width);
         value_o_Density=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 

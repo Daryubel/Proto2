@@ -37,7 +37,7 @@ public class GraStairs extends AppCompatActivity implements View.OnClickListener
         calBtn5=(Button)this.findViewById(R.id.calButton5);
         calBtn6=(Button)this.findViewById(R.id.calButton6);
 
-        value_o_height=(EditText)this.findViewById(R.id.Textinput_o_radius);
+        value_o_height=(EditText)this.findViewById(R.id.Textinput_o_width);
         value_o_density=(EditText)this.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
 

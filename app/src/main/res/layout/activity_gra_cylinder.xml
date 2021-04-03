@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.533" />
 
     <EditText
-        android:id="@+id/Textinput_o_radius"
+        android:id="@+id/Textinput_o_width"
         android:layout_width="213dp"
         android:layout_height="34dp"
         android:layout_marginTop="108dp"
@@ -74,7 +74,7 @@
         android:text="2"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_radius" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_width" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -118,10 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:text="Radius:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_radius"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_width"
+        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_width"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_radius"
+        app:layout_constraintTop_toTopOf="@+id/Textinput_o_width"
         app:layout_constraintVertical_bias="0.8" />
 
     <TextView
