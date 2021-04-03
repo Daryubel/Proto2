@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void gotoMagneticMain()
     {
-        Intent MagMain = new Intent(MainActivity.this, MagCuboid.class);
+        Intent MagMain = new Intent(MainActivity.this, MagCylinder.class);
         startActivity(MagMain);
     }
 
