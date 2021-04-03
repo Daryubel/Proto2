@@ -10,6 +10,8 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +84,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
         for (int i=0; i<length; i++){
             deltaHa.add(new Entry(x[i], ha[i]));
-            deltaZa.add(new Entry(x[i], ha[i]));
+            deltaZa.add(new Entry(x[i], za[i]));
         }
 
         // 2. 创建一个数据集 DataSet ，用来添加 Entry。一个图中可以包含多个数据集
@@ -90,9 +92,6 @@ public class Mag_graph_orbit extends AppCompatActivity {
         LineDataSet set2 = new LineDataSet(deltaZa, "Z_a");
 
         // 3. 通过数据集设置数据的样式，如字体颜色、线型、线型颜色、填充色、线宽等属性
-        // draw dashed line
-        set1.enableDashedLine(10f, 5f, 0f);
-        set2.enableDashedLine(10f, 5f, 0f);
 
         // black lines and points
         set1.setColor(Color.BLACK);
@@ -102,18 +101,25 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
         // line thickness and point size
         set1.setLineWidth(1f);
-        set1.setCircleRadius(3f);
+        set1.setCircleRadius(1f);
         set2.setLineWidth(1f);
-        set2.setCircleRadius(3f);
+        set2.setCircleRadius(1f);
 
         // draw points as solid circles
         set1.setDrawCircleHole(false);
         set2.setDrawCircleHole(false);
 
-        // 4.将数据集添加到数据 ChartData 中
-        LineData data = new LineData(set1, set2);
+        //使用接口ILineDataSet
+        List<ILineDataSet> dataSets = new ArrayList<>() ;
+        //添加数据
+        dataSets.add(set1);
+        dataSets.add(set2);
 
+        // 4.将数据集添加到数据 ChartData 中
+        LineData data = new LineData(dataSets);
         OrbProfile.setData(data);
+        OrbProfile.invalidate();
+
 
         // 背景色
         OrbProfile.setBackgroundColor(Color.WHITE);
