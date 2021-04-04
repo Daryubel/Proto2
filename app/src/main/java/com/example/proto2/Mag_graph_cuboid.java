@@ -119,6 +119,7 @@ public class Mag_graph_cuboid extends AppCompatActivity{
                     Math.sin(Is)-2*depth*x[i]*Math.cos(Is))
                     /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
                     (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
+
             ha[i] = (float) (-mu*magnetization*((2*depth*x[i])*Math.sin(Is)+
                     (Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i],2))*Math.cos(Is))
                     /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*

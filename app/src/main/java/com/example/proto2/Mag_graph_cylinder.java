@@ -66,14 +66,6 @@ public class Mag_graph_cylinder extends AppCompatActivity {
 
         ha = new float[length];
         za = new float[length];
-        for (int i=0; i<length; i++){
-            ha[i] = (float) (mu*magnetization*((Math.pow(depth,2)-Math.pow(x[i],2))*Math.cos(Is)
-                    +2*depth*x[i]*Math.sin(Is))
-                    /2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
-            za[i] = (float) (mu*magnetization*((Math.pow(depth,2)-Math.pow(x[i],2))*Math.sin(Is)
-                    -2*depth*x[i]*Math.cos(Is))
-                    /2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
-        }
 
 
         DrawProfile();
@@ -83,6 +75,18 @@ public class Mag_graph_cylinder extends AppCompatActivity {
 
 
     public void DrawProfile(){
+
+        for (int i=0; i<length; i++){
+            ha[i] = (float) ((mu*magnetization*((Math.pow(depth,2)-
+                    Math.pow(x[i],2))*Math.cos(Is)+2*depth*x[i]*Math.sin(Is)))
+                    /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2)));
+
+            za[i] = (float) ((mu*magnetization*((Math.pow(depth,2)-
+                    Math.pow(x[i],2))*Math.sin(Is)-2*depth*x[i]*Math.cos(Is)))
+                    /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2)));
+        }
+
+
 
         for (int i=0; i<length; i++){
             deltaHa.add(new Entry(x[i], ha[i]));
