@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -15,13 +19,15 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mag_graph_cuboid extends AppCompatActivity {
+public class Mag_graph_cuboid extends AppCompatActivity{
 
 
-    private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
 
     Double width, magnetization, depth;
-    TextView xV, bV, MV, DV;
+    Float Is = (float) 90;
+    TextView xV, bV, MV, DV, IsV;
+    SeekBar seekBarIs;
     Integer length;
     LineChart OrbProfile;
 
@@ -49,6 +55,11 @@ public class Mag_graph_cuboid extends AppCompatActivity {
         bV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
+        IsV=(TextView)this.findViewById(R.id.textView13);
+
+        seekBarIs=(SeekBar)this.findViewById(R.id.seekBarIs);
+        seekBarIs.setMin(0);
+        seekBarIs.setMax(90);
 
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
@@ -65,23 +76,54 @@ public class Mag_graph_cuboid extends AppCompatActivity {
 
         ha = new float[length];
         za = new float[length];
-        for (int i=0; i<length; i++){
-            za[i] = (float) (mu*magnetization*(Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i],2))
-                        /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
-                        (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
-            ha[i] = (float) (-mu*magnetization*(2*depth*x[i])
-                        /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
-                        (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
-        }
 
-
+        barTracking();
         DrawProfile();
 
+    }
+
+    private void barTracking()
+    {
+        seekBarIs.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Is = (float) progress;
+                IsV.setText("Magnetization inclination: " + progress + "/90");
+                DrawProfile();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
 
 
     public void DrawProfile(){
+
+        LineData data = null;
+        if (data != null) {
+            OrbProfile.clearValues();
+        }
+
+
+        for (int i=0; i<length; i++){
+            za[i] = (float) (mu*magnetization*((Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i],2))*
+                    Math.sin(Is)-2*depth*x[i]*Math.cos(Is))
+                    /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
+                    (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
+            ha[i] = (float) (-mu*magnetization*((2*depth*x[i])*Math.sin(Is)+
+                    (Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i],2))*Math.cos(Is))
+                    /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
+                    (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
+        }
 
         for (int i=0; i<length; i++){
             deltaHa.add(new Entry(x[i], ha[i]));
@@ -93,6 +135,7 @@ public class Mag_graph_cuboid extends AppCompatActivity {
         LineDataSet set2 = new LineDataSet(deltaZa, "Z_a");
 
         // 3. 通过数据集设置数据的样式，如字体颜色、线型、线型颜色、填充色、线宽等属性
+
 
         // black lines and points
         set1.setColor(Color.BLACK);
@@ -117,9 +160,8 @@ public class Mag_graph_cuboid extends AppCompatActivity {
         dataSets.add(set2);
 
         // 4.将数据集添加到数据 ChartData 中
-        LineData data = new LineData(dataSets);
+        data = new LineData(dataSets);
         OrbProfile.setData(data);
-        OrbProfile.invalidate();
 
 
         // 背景色

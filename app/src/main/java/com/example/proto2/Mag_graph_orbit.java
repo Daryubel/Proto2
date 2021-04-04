@@ -19,11 +19,12 @@ import java.util.List;
 public class Mag_graph_orbit extends AppCompatActivity {
 
 
-    private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
 
     Double radius, magnetization, depth;
     TextView xV, rV, MV, DV;
     Integer length;
+    Float Is = (float) 90;
     LineChart OrbProfile;
 
     int[] x= null;
@@ -67,10 +68,13 @@ public class Mag_graph_orbit extends AppCompatActivity {
         ha = new float[length];
         za = new float[length];
         for (int i=0; i<length; i++){
-            ha[i] = (float) ((float) -(magnetization*3*depth*x[i])
-                    /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 2.5));
-            za[i] = (float) ((float) (magnetization*(2*Math.pow(depth,2)-Math.pow(x[i],2)))
-                    /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 2.5));
+            ha[i] = (float) (mu*magnetization*((2*Math.pow(x[i],2)-
+                    Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)+
+                    3*depth*x[i]*Math.sin(Is))
+                    /4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2.5));
+            za[i] = (float) (mu*magnetization*((2*Math.pow(depth,2)-
+                    Math.pow(x[i],2))*Math.sin(Is)-3*depth*x[i]*Math.cos(Is))
+                    /4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2.5));
         }
 
 
