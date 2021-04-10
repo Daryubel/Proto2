@@ -124,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void gotoGravityMain()
     {
-        Intent GraMain = new Intent(MainActivity.this, GraCylinder.class);
+        Intent GraMain = new Intent(MainActivity.this, GraHome.class);
         startActivity(GraMain);
     }
     public void gotoMagneticMain()
     {
-        Intent MagMain = new Intent(MainActivity.this, MagOrbit.class);
+        Intent MagMain = new Intent(MainActivity.this, MagHome.class);
         startActivity(MagMain);
     }
 

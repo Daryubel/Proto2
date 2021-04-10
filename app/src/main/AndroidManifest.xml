@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/luxun"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proto2">
-        <activity android:name=".Mag_graph_cylinder"></activity>
+        <activity android:name=".MagHome"></activity>
+        <activity android:name=".GraHome" />
+        <activity android:name=".Mag_graph_cylinder" />
         <activity android:name=".MagCylinder" />
         <activity android:name=".Mag_graph_cuboid" />
         <activity android:name=".MagCuboid" />
