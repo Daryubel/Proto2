@@ -1,66 +1,80 @@
 package com.example.proto2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MagCylinder extends AppCompatActivity implements View.OnClickListener{
+public class MagCylinder extends Fragment implements View.OnClickListener{
 
     private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+
+    View view = null;
 
     TextView tv_peak, tv_length, barprogress, fieldLength;;
     EditText value_o_Radius,value_o_magnetization,value_o_Depth;
     Button calBtn3, calBtn4;
-    Context mContext;
     SeekBar seekBar, lengthBar;
     Double radius, magnetization, depth;
     Integer length;
 
 
+    public MagCylinder() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mag_orbit);
-        Log.d("MainActivity","onCreate execute");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        if (view == null) {
+            view = inflater.inflate(R.layout.activity_mag_cylinder, container, false);
+        }
 
-        calBtn3=(Button)this.findViewById(R.id.calButton5);
-        calBtn4=(Button)this.findViewById(R.id.calButton6);
+        calBtn3=(Button)view.findViewById(R.id.calButton5);
+        calBtn4=(Button)view.findViewById(R.id.calButton6);
 
-        value_o_Radius=(EditText)this.findViewById(R.id.Textinput_o_width);
-        value_o_magnetization=(EditText)this.findViewById(R.id.Textinput_o_density);
-        value_o_Depth=(EditText)this.findViewById(R.id.Textinput_o_Depth);
+        value_o_Radius=(EditText)view.findViewById(R.id.Textinput_o_width);
+        value_o_magnetization=(EditText)view.findViewById(R.id.Textinput_o_density);
+        value_o_Depth=(EditText)view.findViewById(R.id.Textinput_o_Depth);
 
-        tv_length=(TextView)this.findViewById(R.id.textView4);
-        tv_peak=(TextView)this.findViewById(R.id.textView6);
-        barprogress=(TextView)this.findViewById(R.id.textView7);
-        fieldLength=(TextView)this.findViewById(R.id.textView8);
+        tv_length=(TextView)view.findViewById(R.id.textView4);
+        tv_peak=(TextView)view.findViewById(R.id.textView6);
+        barprogress=(TextView)view.findViewById(R.id.textView7);
+        fieldLength=(TextView)view.findViewById(R.id.textView8);
 
-        seekBar = (SeekBar)this.findViewById(R.id.seekBar1);
+        seekBar = (SeekBar)view.findViewById(R.id.seekBar1);
         seekBar.setMin(10);
         seekBar.setMax(100);
 
-        lengthBar = (SeekBar)this.findViewById(R.id.seekBar2);
+        lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
         lengthBar.setMin(50);
         lengthBar.setMax(500);
 
         calBtn3.setOnClickListener((View.OnClickListener) this);
         calBtn4.setOnClickListener((View.OnClickListener) this);
 
-        mContext = MagCylinder.this;
-
         barTracking();
+        return view;
+    }
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        Log.d("MainActivity","onCreate execute");
     }
 
 
@@ -78,12 +92,12 @@ public class MagCylinder extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(mContext, "Touching SeekBar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(mContext, "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -97,12 +111,12 @@ public class MagCylinder extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(mContext, "Touching SeekBar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(mContext, "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -145,13 +159,13 @@ public class MagCylinder extends AppCompatActivity implements View.OnClickListen
 
         Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
         tv_peak.setText(Peak);
-        Toast.makeText(mContext, "Calculation Complete", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Calculation Complete", Toast.LENGTH_SHORT).show();
     }
 
     public void DrawGraph()
     {
         calculate();
-        Intent mag_graph = new Intent(MagCylinder.this, Mag_graph_cylinder.class);
+        Intent mag_graph = new Intent(getActivity(), Mag_graph_cylinder.class);
 
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
