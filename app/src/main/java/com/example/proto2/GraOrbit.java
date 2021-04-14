@@ -60,8 +60,9 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         seekBar.setMax(100);
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
-        lengthBar.setMin(50);
+        lengthBar.setMin(10);
         lengthBar.setMax(500);
+        lengthBar.incrementProgressBy(10);
 
         calBtn.setOnClickListener((View.OnClickListener) this);
         calBtn2.setOnClickListener((View.OnClickListener) this);
@@ -179,7 +180,6 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
         startActivity(Gra_graph);
     }
-
 
 }
 

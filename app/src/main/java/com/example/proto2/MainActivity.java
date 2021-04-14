@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         gravityNav=(Button)this.findViewById(R.id.gravityBtn);
         magneticNav=(Button)this.findViewById(R.id.magneticBtn);
-        DiaFAP= (FloatingActionButton) this.findViewById(R.id.floatingActionButton);
+//        DiaFAP= (FloatingActionButton) this.findViewById(R.id.floatingActionButton);
 
         gravityNav.setOnClickListener((View.OnClickListener)this);
         magneticNav.setOnClickListener((View.OnClickListener)this);
-        DiaFAP.setOnClickListener((View.OnClickListener)this);
+//        DiaFAP.setOnClickListener((View.OnClickListener)this);
 
     }
     @Override
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.magneticBtn:
                 gotoMagneticMain();           //"MAGNETIC" btn
                 break;
-            case R.id.floatingActionButton:
-                FAPDialog();       //"FAP" btn
+//            case R.id.floatingActionButton:
+//                FAPDialog();       //"FAP" btn
 //                break;
 //            case R.id.btn_multi_choice:
 //                multiChoiceDialog();        //多选对话框

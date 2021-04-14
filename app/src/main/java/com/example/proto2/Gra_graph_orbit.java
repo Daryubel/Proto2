@@ -2,10 +2,12 @@ package com.example.proto2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -19,17 +21,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import id.web.nanangmaxfi.contourplot.ColorScale;
+import id.web.nanangmaxfi.contourplot.Contour2DMap;
+
 public class Gra_graph_orbit extends AppCompatActivity {
 
-    private Double G = 6.67259*10, pi = 3.14159;
+    private final Double G = 6.67259*10, pi = 3.14159;
 
+    private static final String TAG = Gra_graph_orbit.class.getSimpleName();
+    private ImageView drawImageView;
     Double radius, density, depth;
     TextView xV, rV, rhoV, DV;
-    Integer length;
+    Integer length, length2D;
+
+    Integer interval = 20;
+
+    Contour2DMap contour2DMap;
+    Bitmap bitmap;
     LineChart OrbProfile;
 
     int[] x= null;
+    int[] y=null;
     float[] g = null;
+    double[][] g2D = null;
     List<Entry> deltaG = new ArrayList<Entry>();
 
 
@@ -45,6 +59,9 @@ public class Gra_graph_orbit extends AppCompatActivity {
         density = Double.valueOf(getIntent().getStringExtra("density"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
+        drawImageView = findViewById(R.id.drawImageView);
+        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
+        contour2DMap = new Contour2DMap(bitmap,380,250);
         xV=(TextView)this.findViewById(R.id.textView9);
         rV=(TextView)this.findViewById(R.id.textView10);
         rhoV=(TextView)this.findViewById(R.id.textView11);
@@ -62,6 +79,10 @@ public class Gra_graph_orbit extends AppCompatActivity {
         for (int i=0; i<length; i++){
             x[i] = -length/2 + i;
         }
+        y = new int[length];
+        for (int i=0; i<length; i++){
+            y[i] = -length/2 + i;
+        }
 
         g = new float[length];
         for (int i=0; i<length; i++){
@@ -69,8 +90,17 @@ public class Gra_graph_orbit extends AppCompatActivity {
                                         /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 1.5));
         }
 
+        g2D = new double[length][length];
+        for (int i=0; i<length; i=i++){
+            for (int j=0; j<length; j=j++){
+                g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                        /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+            }
+        }
 
+//        DataSampling();
         DrawProfile();
+        DrawContour();
 
     }
 
@@ -131,6 +161,82 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
         // 设置双指缩放
         OrbProfile.setPinchZoom(true);
+
+    }
+
+    public void DrawContour(){
+
+        double[][] data = {
+                {-1,-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1},
+                {-1,-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1},
+                {-1,-1,	-1,	-1,	1.08,0.0,2.32,-1,3.63,-1,0.0,-1},
+                {-1,0.0,0.48,-1,7.52,2.32,2.95,	5.35,10.48,	6.46,5.35,3.63},
+                {4.52,2.95,7.52,2.32,10.48,10.48,10.48,10.48,10.48,	10.48,6.46,	4.52},
+                {6.46,	9.0,	9.0,	9.0	,10.48,	10.48,	10.48	,9.0,	9.0,	7.52,	4.52	,3.63},
+                {6.46,	7.52,	5.35,	9.0	,9.0,10.48	,10.48,	9.0,	10.48,	4.52,	4.52,	0.0},
+                {5.35	,7.52,	5.35	,7.52	,7.52,7.52,	5.35,	2.95,	4.52	,3.63,	5.35,3.63}
+        };
+        contour2DMap.setData(g2D);
+        contour2DMap.setIsoFactor(0.1);
+        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
+        contour2DMap.draw(drawImageView);
+    }
+
+    public void DataSampling(){
+
+
+        if (length < 30){
+            g2D = new double[length][length];
+            for (int i=0; i<length; i=i+1){
+                for (int j=0; j<length; j=j+1){
+                    g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                            /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                }
+            }
+        }
+        else {
+            if (length < 50){
+            g2D = new double[length][length];
+            for (int i=0; i<length; i=i+(interval/2)){
+                for (int j=0; j<length; j=j+(interval/2)){
+                    g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                            /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                    }
+                }
+            }
+            else {
+                if (length < 100){
+                    g2D = new double[length][length];
+                    for (int i=0; i<length; i=i+(interval)){
+                        for (int j=0; j<length; j=j+(interval)){
+                            g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                                    /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                        }
+                    }
+                }
+                else{
+                    if (length < 200){
+                        g2D = new double[length][length];
+                        for (int i=0; i<length; i=i+(interval*2)){
+                            for (int j=0; j<length; j=j+(interval*2)){
+                                g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                                        /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                            }
+                        }
+                    }
+                    else {
+                        g2D = new double[length][length];
+                        for (int i=0; i<length; i=i+(interval*3)){
+                            for (int j=0; j<length; j=j+(interval*3)){
+                                g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
+                                        /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
