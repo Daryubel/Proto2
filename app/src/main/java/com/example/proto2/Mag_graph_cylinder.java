@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -31,6 +34,30 @@ public class Mag_graph_cylinder extends AppCompatActivity {
     List<Entry> deltaHa = new ArrayList<Entry>();
     float[] za = null;
     List<Entry> deltaZa = new ArrayList<Entry>();
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate( R.menu.operations , menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId())
+        {
+            case  R.id.JPG :
+//                QuickShot.of(OrbProfile).setResultListener(this).toJPG().save();
+                Toast.makeText(this, "Saved as .jpg in /pictures.", Toast.LENGTH_SHORT).show();
+                break;
+            case  R.id.PNG :
+//                QuickShot.of(OrbProfile).setResultListener(this).toPNG().save();
+                Toast.makeText(this, "Saved as .png in /pictures.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
 
 
 

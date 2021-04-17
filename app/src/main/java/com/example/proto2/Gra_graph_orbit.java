@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -16,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.muddzdev.quickshot.QuickShot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +33,11 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
     private final Double G = 6.67259*10, pi = 3.14159;
 
-    private static final String TAG = Gra_graph_orbit.class.getSimpleName();
+//    private static final String TAG = Gra_graph_orbit.class.getSimpleName();
     private ImageView drawImageView;
     Double radius, density, depth;
     TextView xV, rV, rhoV, DV;
-    Integer length, length2D;
+    Integer length;
 
     Integer interval = 20;
 
@@ -40,11 +45,35 @@ public class Gra_graph_orbit extends AppCompatActivity {
     Bitmap bitmap;
     LineChart OrbProfile;
 
-    int[] x= null;
-    int[] y=null;
+    int[] x, y= null;
     float[] g = null;
     double[][] g2D = null;
     List<Entry> deltaG = new ArrayList<Entry>();
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate( R.menu.operations , menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId())
+        {
+            case  R.id.JPG :
+//                QuickShot.of(OrbProfile).setResultListener(this).toJPG().save();
+                Toast.makeText(this, "Saved as .jpg in /pictures.", Toast.LENGTH_SHORT).show();
+                break;
+            case  R.id.PNG :
+//                QuickShot.of(OrbProfile).setResultListener(this).toPNG().save();
+                Toast.makeText(this, "Saved as .png in /pictures.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
 
 
     @Override
@@ -58,45 +87,53 @@ public class Gra_graph_orbit extends AppCompatActivity {
         radius = Double.valueOf(getIntent().getStringExtra("radius"));
         density = Double.valueOf(getIntent().getStringExtra("density"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
+        Log.d("GraGraph","intent finished");
 
         drawImageView = findViewById(R.id.drawImageView);
         bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
         contour2DMap = new Contour2DMap(bitmap,380,250);
+
+
         xV=(TextView)this.findViewById(R.id.textView9);
         rV=(TextView)this.findViewById(R.id.textView10);
         rhoV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
 
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
+        Log.d("GraGraph","views initialized");
 
 
         xV.setText("x length:" + length);
         rV.setText("radius:" + String.valueOf(radius));
         rhoV.setText("density:" + String.valueOf(density));
         DV.setText("depth:" + String.valueOf(depth));
+        Log.d("GraGraph","text set");
 
         x = new int[length];
-        for (int i=0; i<length; i++){
-            x[i] = -length/2 + i;
-        }
         y = new int[length];
         for (int i=0; i<length; i++){
+            x[i] = -length/2 + i;
             y[i] = -length/2 + i;
         }
+        Log.d("GraGraph","xy set");
+
 
         g = new float[length];
         for (int i=0; i<length; i++){
             g[i] = (float) ((G*depth*4*pi*Math.pow(radius,3)/3)
                                         /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 1.5));
         }
+        Log.d("GraGraph","g1D calculation completed");
 
         g2D = new double[length][length];
-        for (int i=0; i<length; i=i++){
-            for (int j=0; j<length; j=j++){
+        Log.d("GraGraph","g2D initialization completed");
+        for (int i=0; i<length; i++){
+            for (int j=0; j<length; j++){
                 g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
                         /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
             }
         }
+        Log.d("GraGraph","g2D calculation completed");
 
 //        DataSampling();
         DrawProfile();
@@ -105,6 +142,15 @@ public class Gra_graph_orbit extends AppCompatActivity {
     }
 
 
+
+    public void DrawContour(){
+        contour2DMap.setData(g2D);
+        contour2DMap.setIsoFactor(1);
+        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.draw(drawImageView);
+        Log.d("GraGraph","draw");
+    }
 
     public void DrawProfile(){
 
@@ -162,25 +208,6 @@ public class Gra_graph_orbit extends AppCompatActivity {
         // 设置双指缩放
         OrbProfile.setPinchZoom(true);
 
-    }
-
-    public void DrawContour(){
-
-        double[][] data = {
-                {-1,-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1},
-                {-1,-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1,	-1},
-                {-1,-1,	-1,	-1,	1.08,0.0,2.32,-1,3.63,-1,0.0,-1},
-                {-1,0.0,0.48,-1,7.52,2.32,2.95,	5.35,10.48,	6.46,5.35,3.63},
-                {4.52,2.95,7.52,2.32,10.48,10.48,10.48,10.48,10.48,	10.48,6.46,	4.52},
-                {6.46,	9.0,	9.0,	9.0	,10.48,	10.48,	10.48	,9.0,	9.0,	7.52,	4.52	,3.63},
-                {6.46,	7.52,	5.35,	9.0	,9.0,10.48	,10.48,	9.0,	10.48,	4.52,	4.52,	0.0},
-                {5.35	,7.52,	5.35	,7.52	,7.52,7.52,	5.35,	2.95,	4.52	,3.63,	5.35,3.63}
-        };
-        contour2DMap.setData(g2D);
-        contour2DMap.setIsoFactor(0.1);
-        contour2DMap.setInterpolationFactor(1);
-        contour2DMap.setMapColorScale(ColorScale.COLOR);
-        contour2DMap.draw(drawImageView);
     }
 
     public void DataSampling(){

@@ -1,9 +1,5 @@
 package com.example.proto2;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +11,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 public class GraOrbit extends Fragment implements View.OnClickListener{
 
@@ -62,7 +60,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
         lengthBar.setMin(10);
         lengthBar.setMax(500);
-        lengthBar.incrementProgressBy(10);
+//        lengthBar.incrementProgressBy(10);
 
         calBtn.setOnClickListener((View.OnClickListener) this);
         calBtn2.setOnClickListener((View.OnClickListener) this);
@@ -144,8 +142,6 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         }
     }
 
-
-    //Functions that are called by click
     public void calculate()
     {
         String inputText1=value_o_Radius.getText().toString();  //Convert
@@ -179,6 +175,8 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         Gra_graph.putExtra("depth", String.valueOf(depth));
 
         startActivity(Gra_graph);
+        Log.d("GraGraph","started activity");
+
     }
 
 }
