@@ -58,11 +58,11 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
         seekBar.setMax(100);
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
-        lengthBar.setMin(50);
+        lengthBar.setMin(10);
         lengthBar.setMax(500);
 
-        calBtn3.setOnClickListener((View.OnClickListener) this);
-        calBtn4.setOnClickListener((View.OnClickListener) this);
+        calBtn3.setOnClickListener(this);
+        calBtn4.setOnClickListener(this);
 
         barTracking();
         return view;
@@ -76,10 +76,6 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
         Log.d("MainActivity","onCreate execute");
     }
 
-
-
-
-    //Void, just a function running background and is started in Protected void onCreate
     private void barTracking()
     {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -140,7 +136,6 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
         }
     }
 
-
     //Functions that are called by click
     public void calculate()
     {
@@ -152,6 +147,7 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
 
         radius=Double.valueOf(inputText1);
         magnetization=Double.valueOf(inputText2);
+        magnetization=(magnetization*pi*4*Math.pow(radius,3))/3;
         depth=Double.valueOf(inputText3);
 
         out_o_peak=(4/3)*pi*radius*radius*radius*magnetization*G/(depth*depth);
@@ -165,7 +161,6 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
     {
         calculate();
         Intent mag_graph = new Intent(getActivity(), Mag_graph_orbit.class);
-
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.

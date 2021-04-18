@@ -31,7 +31,7 @@ import id.web.nanangmaxfi.contourplot.Contour2DMap;
 
 public class Gra_graph_orbit extends AppCompatActivity {
 
-    private final Double G = 6.67259*10, pi = 3.14159;
+    private final Double G = 6.67259*10, pi = Math.PI;
 
 //    private static final String TAG = Gra_graph_orbit.class.getSimpleName();
     private ImageView drawImageView;
@@ -147,7 +147,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
         contour2DMap.setData(g2D);
         contour2DMap.setIsoFactor(1);
         contour2DMap.setInterpolationFactor(1);
-        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
         Log.d("GraGraph","draw");
     }

@@ -20,28 +20,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
+    <ImageView
+        android:id="@+id/drawImageView"
+        android:layout_width="380dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="17dp"
+        android:contentDescription="image"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="169dp"
         android:layout_height="43dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="236dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="169dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="236dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="169dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView10"
@@ -49,21 +73,12 @@
         android:layout_height="43dp"
         android:layout_marginStart="29dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="144dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

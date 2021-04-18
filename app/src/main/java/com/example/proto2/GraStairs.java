@@ -59,7 +59,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
         seekBar.setMax(100);
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
-        lengthBar.setMin(50);
+        lengthBar.setMin(10);
         lengthBar.setMax(500);
 
         calBtn5.setOnClickListener((View.OnClickListener) this);

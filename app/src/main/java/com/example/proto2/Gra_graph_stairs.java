@@ -2,10 +2,13 @@ package com.example.proto2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +20,26 @@ import com.github.mikephil.charting.data.LineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.web.nanangmaxfi.contourplot.ColorScale;
+import id.web.nanangmaxfi.contourplot.Contour2DMap;
+
 public class Gra_graph_stairs extends AppCompatActivity {
 
-    private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
 
+    private ImageView drawImageView;
     Double height, density, depth;
     TextView xV, hV, rV, DV;
     Integer length;
+
+
+    Contour2DMap contour2DMap;
+    Bitmap bitmap;
     LineChart OrbProfile;
 
-    int[] x= null;
+    int[] x, y= null;
     float[] g = null;
+    double[][] g2D = null;
     List<Entry> deltaG = new ArrayList<Entry>();
 
 
@@ -73,17 +85,22 @@ public class Gra_graph_stairs extends AppCompatActivity {
         rV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
 
-        OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
-
-
         xV.setText("x length:" + length);
         hV.setText("radius:" + String.valueOf(height));
         rV.setText("density:" + String.valueOf(density));
         DV.setText("depth:" + String.valueOf(depth));
 
+        drawImageView = findViewById(R.id.drawImageView);
+        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
+        contour2DMap = new Contour2DMap(bitmap,380,250);
+
+        OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
+
         x = new int[length];
+        y = new int[length];
         for (int i=0; i<length; i++){
             x[i] = -length/2 + i;
+            y[i] = -length/2 + i;
         }
 
         g = new float[length];
@@ -97,12 +114,31 @@ public class Gra_graph_stairs extends AppCompatActivity {
                     ));
         }
 
+        g2D = new double[length][length];
+        for (int i=0; i<length; i++){
+            for (int j=0; j<length; j++){
+                g2D[i][j] = (G*density*(pi*(depth-height)+
+                                x[i]*Math.log((Math.pow(x[i],2)+Math.pow(depth,2))
+                                        /(Math.pow(x[i],2)+Math.pow(height,2)))+
+                                2*depth*Math.atan(x[i]/depth)-
+                                2*height*Math.atan(x[i]/height)));
+            }
+        }
+
 
         DrawProfile();
+        DrawContour();
 
     }
 
-
+    public void DrawContour(){
+        contour2DMap.setData(g2D);
+        contour2DMap.setIsoFactor(1);
+        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.draw(drawImageView);
+        Log.d("GraGraph","draw");
+    }
 
     public void DrawProfile(){
 

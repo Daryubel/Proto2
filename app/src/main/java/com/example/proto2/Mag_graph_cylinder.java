@@ -2,10 +2,13 @@ package com.example.proto2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,21 +21,28 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.web.nanangmaxfi.contourplot.ColorScale;
+import id.web.nanangmaxfi.contourplot.Contour2DMap;
+
 public class Mag_graph_cylinder extends AppCompatActivity {
 
 
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
 
+    private ImageView drawImageView;
     Double radius, magnetization, depth;
     TextView xV, rV, MV, DV;
     Float Is = (float) 90;
     Integer length;
+
+    Contour2DMap contour2DMap;
+    Bitmap bitmap;
     LineChart OrbProfile;
 
-    int[] x= null;
-    float[] ha = null;
+    int[] x, y= null;
+    float[] za, ha = null;
+    double[][] Ha2D, Za2D = null;
     List<Entry> deltaHa = new ArrayList<Entry>();
-    float[] za = null;
     List<Entry> deltaZa = new ArrayList<Entry>();
 
 
@@ -78,8 +88,11 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
 
+        drawImageView = findViewById(R.id.drawImageView);
+        Log.d("Contour", "ImageView initialized");
+        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
+        contour2DMap = new Contour2DMap(bitmap,380,250);
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
-
 
         xV.setText("x length:" + length);
         rV.setText("radius:" + String.valueOf(radius));
@@ -87,22 +100,14 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         DV.setText("depth:" + String.valueOf(depth));
 
         x = new int[length];
+        y = new int[length];
         for (int i=0; i<length; i++){
             x[i] = -length/2 + i;
+            y[i] = -length/2 + i;
         }
 
         ha = new float[length];
         za = new float[length];
-
-
-        DrawProfile();
-
-    }
-
-
-
-    public void DrawProfile(){
-
         for (int i=0; i<length; i++){
             ha[i] = (float) ((mu*magnetization*((Math.pow(depth,2)-
                     Math.pow(x[i],2))*Math.cos(Is)+2*depth*x[i]*Math.sin(Is)))
@@ -113,6 +118,37 @@ public class Mag_graph_cylinder extends AppCompatActivity {
                     /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2)));
         }
 
+        Ha2D = new double[length][length];
+        Za2D = new double[length][length];
+        Log.d("Contour", "2D data initialized");
+        for (int i=0; i<length; i++){
+            for (int j=0; j<length; j++){
+                Ha2D[i][j] = (mu*magnetization*((Math.pow(depth,2)-
+                        Math.pow(x[i],2))*Math.cos(Is)+2*depth*x[i]*Math.sin(Is)))
+                        /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
+                Za2D[i][j] = (mu*magnetization*((Math.pow(depth,2)-
+                        Math.pow(x[i],2))*Math.sin(Is)-2*depth*x[i]*Math.cos(Is)))
+                        /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
+            }
+        }
+        Log.d("Contour", "2D data calculated");
+
+        DrawProfile();
+        Log.d("Contour", "Profile completed");
+        DrawContour();
+        Log.d("Contour", "Contour completed");
+    }
+
+    public void DrawContour(){
+        contour2DMap.setData(Ha2D);
+        Log.d("Contour", "Data Set");
+        contour2DMap.setIsoFactor(1);
+        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.draw(drawImageView);
+    }
+
+    public void DrawProfile(){
 
 
         for (int i=0; i<length; i++){

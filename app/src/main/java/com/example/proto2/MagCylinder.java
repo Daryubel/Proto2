@@ -59,7 +59,7 @@ public class MagCylinder extends Fragment implements View.OnClickListener{
         seekBar.setMax(100);
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
-        lengthBar.setMin(50);
+        lengthBar.setMin(10);
         lengthBar.setMax(500);
 
         calBtn3.setOnClickListener((View.OnClickListener) this);
@@ -92,12 +92,12 @@ public class MagCylinder extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,12 +111,12 @@ public class MagCylinder extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -153,6 +153,7 @@ public class MagCylinder extends Fragment implements View.OnClickListener{
 
         radius=Double.valueOf(inputText1);
         magnetization=Double.valueOf(inputText2);
+        magnetization=magnetization*pi*Math.pow(radius,2);
         depth=Double.valueOf(inputText3);
 
         out_o_peak=(4/3)*pi*radius*radius*radius*magnetization*G/(depth*depth);

@@ -29,8 +29,8 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
 
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
-    private ImageView drawImageView;
 
+    private ImageView drawImageView;
     Double radius, magnetization, depth;
     TextView xV, rV, MV, DV;
     Integer length;
@@ -42,10 +42,9 @@ public class Mag_graph_orbit extends AppCompatActivity {
     LineChart OrbProfile;
 
     int[] x, y= null;
+    float[] za, ha = null;
     double[][] ha2D, za2D = null;
-    float[] ha = null;
     List<Entry> deltaHa = new ArrayList<Entry>();
-    float[] za = null;
     List<Entry> deltaZa = new ArrayList<Entry>();
 
 
@@ -86,22 +85,21 @@ public class Mag_graph_orbit extends AppCompatActivity {
         magnetization = Double.valueOf(getIntent().getStringExtra("magnetization"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
-        drawImageView = findViewById(R.id.drawImageView);
-        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
-        contour2DMap = new Contour2DMap(bitmap,380,250);
-
         xV=(TextView)this.findViewById(R.id.textView9);
         rV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
 
-        OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
-
-
         xV.setText("x length:" + length);
         rV.setText("radius:" + String.valueOf(radius));
         MV.setText("magnetization:" + String.valueOf(magnetization));
         DV.setText("depth:" + String.valueOf(depth));
+
+        drawImageView = findViewById(R.id.drawImageView);
+        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
+        contour2DMap = new Contour2DMap(bitmap,380,250);
+
+        OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
         x = new int[length];
         y = new int[length];
@@ -114,12 +112,11 @@ public class Mag_graph_orbit extends AppCompatActivity {
         za = new float[length];
         for (int i=0; i<length; i++){
             ha[i] = (float) ((mu*magnetization*((2*Math.pow(x[i],2)-
-                    Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)+
-                    3*depth*x[i]*Math.sin(Is)))
+                    Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)))
                     /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2.5)));
 
             za[i] = (float) ((mu*magnetization*((2*Math.pow(depth,2)-
-                    Math.pow(x[i],2))*Math.sin(Is)-3*depth*x[i]*Math.cos(Is)))
+                    Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
                     /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2.5)));
         }
 
@@ -128,11 +125,14 @@ public class Mag_graph_orbit extends AppCompatActivity {
         za2D = new double[length][length];
         for (int i=0; i<length; i++){
             for (int j=0; j<length; j++){
-                za2D[i][j] = (double) 23;
-
+                ha2D[i][j] = ((mu*magnetization*((2*Math.pow(x[i],2)-Math.pow(y[j],2)-
+                        Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)))
+                        /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2),2.5)));
+                za2D[i][j] = ((mu*magnetization*((2*Math.pow(depth,2)-Math.pow(y[j],2)-
+                        Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
+                        /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2),2.5)));
             }
         }
-
 
 
         DrawProfile();
@@ -142,12 +142,11 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
 
     public void DrawContour(){
-        contour2DMap.setData(za2D);
+        contour2DMap.setData(ha2D);
         contour2DMap.setIsoFactor(1);
         contour2DMap.setInterpolationFactor(1);
-        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
-        Log.d("GraGraph","draw");
     }
 
     public void DrawProfile(){
