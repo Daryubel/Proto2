@@ -19,7 +19,10 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import id.web.nanangmaxfi.contourplot.ColorScale;
@@ -28,14 +31,14 @@ import id.web.nanangmaxfi.contourplot.Contour2DMap;
 public class Mag_graph_orbit extends AppCompatActivity {
 
 
-    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
     private ImageView drawImageView;
     Double radius, magnetization, depth;
-    TextView xV, rV, MV, DV;
+    TextView xV, rV, MV, DV, Text14;
     Integer length;
 
-    Integer meshLength = 15;
+    Integer meshLength = 60;
     Integer meshDensity = 500/meshLength;
 
     Double Is = pi/3;
@@ -93,6 +96,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
         rV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
+        Text14=(TextView)this.findViewById(R.id.textView14);
 
         xV.setText("x length:" + length);
         rV.setText("radius:" + String.valueOf(radius));
@@ -133,9 +137,10 @@ public class Mag_graph_orbit extends AppCompatActivity {
         Log.d("MagOrbit","empty contour array initialized");
         for (int i=0; i<meshLength; i++){
             for (int j=0; j<meshLength; j++){
-                ha2D[i][j] = ((mu*magnetization*((2*Math.pow(x[i],2)-Math.pow(y[j],2)-
-                        Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)))
-                        /(4*pi*Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2)),2.5)));
+                ha2D[i][j] = ((mu*magnetization*((2*Math.pow(x[i*meshDensity],2)-Math.pow(y[j*meshDensity],2)-
+                        Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i*meshDensity]*Math.sin(Is)))
+                        /(4*pi*Math.pow((Math.pow(x[i*meshDensity],2)+Math.pow(depth,2)+
+                        Math.pow(y[j*meshDensity],2)),2.5)));
                 za2D[i][j] = ((mu*magnetization*((2*Math.pow(depth,2)-Math.pow(y[j],2)-
                         Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
                         /(4*pi*Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2)),2.5)));
@@ -151,6 +156,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
         DrawProfile();
         Log.d("MagOrbit","Profile Drawn");
+//        Text14.setText(Arrays.deepToString(ha2D));
         DrawContour();
 
     }

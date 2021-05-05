@@ -2,11 +2,14 @@ package com.example.proto2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,25 +24,31 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.web.nanangmaxfi.contourplot.ColorScale;
+import id.web.nanangmaxfi.contourplot.Contour2DMap;
+
 public class Mag_graph_cuboid extends AppCompatActivity{
 
 
-    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
+    private ImageView drawImageView;
     Double width, magnetization, depth;
-    Double Is = pi/2;
-    TextView xV, bV, MV, DV, IsV;
-    SeekBar seekBarIs;
+    Double Is = pi/3;
+    TextView xV, bV, MV, DV;
     Integer length;
+
+    Contour2DMap contour2DMap;
+    Bitmap bitmap;
     LineChart OrbProfile;
 
-    Integer meshLength = 15;
+    Integer meshLength = 50;
     Integer meshDensity = 500/meshLength;
 
     int[] x= null;
-    float[] ha = null;
+    float[] ha, za = null;
+    double[][] Ha2D, Za2D = null;
     List<Entry> deltaHa = new ArrayList<Entry>();
-    float[] za = null;
     List<Entry> deltaZa = new ArrayList<Entry>();
 
 
@@ -84,12 +93,11 @@ public class Mag_graph_cuboid extends AppCompatActivity{
         bV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
-        IsV=(TextView)this.findViewById(R.id.textView13);
 
-        seekBarIs=(SeekBar)this.findViewById(R.id.seekBarIs);
-        seekBarIs.setMin(0);
-        seekBarIs.setMax(90);
-
+        drawImageView = findViewById(R.id.drawImageView);
+        Log.d("Contour", "ImageView initialized");
+        bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
+        contour2DMap = new Contour2DMap(bitmap,380,250);
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
 
@@ -105,44 +113,6 @@ public class Mag_graph_cuboid extends AppCompatActivity{
 
         ha = new float[length];
         za = new float[length];
-
-        barTracking();
-        DrawProfile();
-
-    }
-
-    private void barTracking()
-    {
-        seekBarIs.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Is = (double) progress;
-                IsV.setText("Magnetization inclination: " + progress + "/90");
-                DrawProfile();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-
-
-
-    public void DrawProfile(){
-
-        LineData data = null;
-        if (data != null) {
-            OrbProfile.clearValues();
-        }
-
-
         for (int i=0; i<length; i++){
             za[i] = (float) (mu*magnetization*((Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i],2))*
                     Math.sin(Is)-2*depth*x[i]*Math.cos(Is))
@@ -154,6 +124,43 @@ public class Mag_graph_cuboid extends AppCompatActivity{
                     /(2*pi*(Math.pow(x[i]-width,2)+Math.pow(depth,2))*
                     (Math.pow(x[i]+width,2)+Math.pow(depth,2))));
         }
+
+        Ha2D = new double[meshLength][meshLength];
+        Za2D = new double[meshLength][meshLength];
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
+                Ha2D[i][j] = (-mu*magnetization*((2*depth*x[i*meshDensity])*Math.sin(Is)+
+                        (Math.pow(depth,2)+Math.pow(width,2)-Math.pow(x[i*meshDensity],2))*Math.cos(Is)))
+                        /(2*pi*(Math.pow(x[i*meshDensity]-width,2)+Math.pow(depth,2))*
+                        (Math.pow(x[i*meshDensity]+width,2)+Math.pow(depth,2)));
+                Za2D[i][j] = (mu*magnetization*((Math.pow(depth,2)+Math.pow(width,2)-
+                        Math.pow(x[i*meshDensity],2))*Math.sin(Is)-2*depth*x[i*meshDensity]*Math.cos(Is)))
+                        /(2*pi*(Math.pow(x[i*meshDensity]-width,2)+Math.pow(depth,2))*
+                        (Math.pow(x[i*meshDensity]+width,2)+Math.pow(depth,2)));
+            }
+        }
+
+        DrawProfile();
+        Toast.makeText(this,String.valueOf(Ha2D[10][10]),Toast.LENGTH_LONG).show();
+        DrawContour();
+
+    }
+
+    public void DrawContour(){
+        contour2DMap.setData(Ha2D);
+        contour2DMap.setIsoFactor(1);
+        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
+        contour2DMap.draw(drawImageView);
+    }
+
+    public void DrawProfile(){
+
+        LineData data = null;
+        if (data != null) {
+            OrbProfile.clearValues();
+        }
+
 
         for (int i=0; i<length; i++){
             deltaHa.add(new Entry(x[i], ha[i]));

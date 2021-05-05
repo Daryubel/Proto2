@@ -152,7 +152,7 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
         String Peak;
 
         width=Double.valueOf(inputText1);
-        magnetization=Double.valueOf(inputText2);
+        magnetization=Double.valueOf(inputText2)*10e3;
         depth=Double.valueOf(inputText3);
 
         out_o_peak=(4/3)*pi;

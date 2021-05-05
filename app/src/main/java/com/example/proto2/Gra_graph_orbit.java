@@ -36,7 +36,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
 //    private static final String TAG = Gra_graph_orbit.class.getSimpleName();
     private ImageView drawImageView;
     Double radius, density, depth;
-    TextView xV, rV, rhoV, DV;
+    TextView xV, rV, rhoV, DV, Text14;
     Integer length;
 
     Integer interval = 20;
@@ -100,6 +100,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
         rV=(TextView)this.findViewById(R.id.textView10);
         rhoV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
+        Text14=(TextView)this.findViewById(R.id.textView14);
 
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
         Log.d("GraGraph","views initialized");
@@ -140,6 +141,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
 //        DataSampling();
         DrawProfile();
+//        Text14.setText(Arrays.deepToString(g2D));
         DrawContour();
 
     }

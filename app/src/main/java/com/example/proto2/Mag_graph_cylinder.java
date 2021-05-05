@@ -27,7 +27,7 @@ import id.web.nanangmaxfi.contourplot.Contour2DMap;
 public class Mag_graph_cylinder extends AppCompatActivity {
 
 
-    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
+    private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
     private ImageView drawImageView;
     Double radius, magnetization, depth;
@@ -35,7 +35,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
     Double Is = pi/3;
     Integer length;
 
-    Integer meshLength = 15;
+    Integer meshLength = 60;
     Integer meshDensity = 500/meshLength;
 
     Contour2DMap contour2DMap;
@@ -127,11 +127,11 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         for (int i=0; i<meshLength; i++){
             for (int j=0; j<meshLength; j++){
                 Ha2D[i][j] = (mu*magnetization*((Math.pow(depth,2)-
-                        Math.pow(x[i],2))*Math.cos(Is)+2*depth*x[i]*Math.sin(Is)))
-                        /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
+                        Math.pow(x[i*meshDensity],2))*Math.cos(Is)+2*depth*x[i*meshDensity]*Math.sin(Is)))
+                        /(2*pi*Math.pow(Math.pow(x[i*meshDensity],2)+Math.pow(depth,2),2));
                 Za2D[i][j] = (mu*magnetization*((Math.pow(depth,2)-
-                        Math.pow(x[i],2))*Math.sin(Is)-2*depth*x[i]*Math.cos(Is)))
-                        /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
+                        Math.pow(x[i*meshDensity],2))*Math.sin(Is)-2*depth*x[i*meshDensity]*Math.cos(Is)))
+                        /(2*pi*Math.pow(Math.pow(x[i*meshDensity],2)+Math.pow(depth,2),2));
             }
         }
         Log.d("Contour", "2D data calculated");
