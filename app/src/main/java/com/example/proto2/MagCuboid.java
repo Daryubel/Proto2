@@ -1,9 +1,7 @@
 package com.example.proto2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +20,11 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
 
     View view = null;
 
-    TextView tv_peak, tv_length, barprogress, fieldLength;;
-    EditText value_o_width,value_o_magnetization,value_o_Depth;
+    TextView tv_peak, tv_length, barprogress;
+    EditText value_o_width,value_o_magnetization,value_o_Depth, value_o_Is;
     Button calBtn3, calBtn4;
-    SeekBar seekBar, lengthBar;
-    Double width, magnetization, depth;
+    SeekBar depthBar, angleBar;
+    Double width, magnetization, depth, Is;
     Integer length;
 
     public MagCuboid() {
@@ -47,19 +45,19 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
         value_o_width=(EditText)view.findViewById(R.id.Textinput_o_width);
         value_o_magnetization=(EditText)view.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)view.findViewById(R.id.Textinput_o_Depth);
+        value_o_Is= (EditText) view.findViewById(R.id.Textinput_o_Is);
 
-        tv_length=(TextView)view.findViewById(R.id.textView4);
+        tv_length=(TextView)view.findViewById(R.id.Textinput_o_Is);
         tv_peak=(TextView)view.findViewById(R.id.textView6);
         barprogress=(TextView)view.findViewById(R.id.textView7);
-        fieldLength=(TextView)view.findViewById(R.id.textView8);
 
-        seekBar = (SeekBar)view.findViewById(R.id.seekBar1);
-        seekBar.setMin(1);
-        seekBar.setMax(30);
+        depthBar = (SeekBar)view.findViewById(R.id.seekBar1);
+        depthBar.setMin(1);
+        depthBar.setMax(30);
 
-        lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
-        lengthBar.setMin(50);
-        lengthBar.setMax(500);
+        angleBar = (SeekBar)view.findViewById(R.id.seekBar2);
+        angleBar.setMin(0);
+        angleBar.setMax(90);
 
         calBtn3.setOnClickListener((View.OnClickListener) this);
         calBtn4.setOnClickListener((View.OnClickListener) this);
@@ -83,7 +81,7 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
     //Void, just a function running background and is started in Protected void onCreate
     private void barTracking()
     {
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        depthBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 barprogress.setText("Depth: " + progress + "/30 ");
@@ -101,10 +99,10 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
             }
         });
 
-        lengthBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        angleBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar lengthBar, int progress, boolean fromUser) {
-                fieldLength.setText("Length: " + progress + "/500 ");
+                value_o_Is.setText("Magnetic Inclination angle: " + progress + "/90 ");
                 tv_length.setText(String.valueOf(progress));
                 length=Integer.valueOf(progress);
             }
@@ -148,12 +146,15 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
         String inputText1=value_o_width.getText().toString();  //Convert
         String inputText2=value_o_magnetization.getText().toString();
         String inputText3=value_o_Depth.getText().toString();
+        String inputText4=value_o_Is.getText().toString();
         Double out_o_peak;
         String Peak;
 
         width=Double.valueOf(inputText1);
         magnetization=Double.valueOf(inputText2)*10e3;
         depth=Double.valueOf(inputText3);
+        Is=Double.valueOf(inputText4);
+        Is=(Is*pi)/180;
 
         out_o_peak=(4/3)*pi;
 
@@ -170,7 +171,7 @@ public class MagCuboid extends Fragment implements View.OnClickListener{
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        mag_graph.putExtra("xLength", String.valueOf(length));
+        mag_graph.putExtra("is", String.valueOf(Is));
         mag_graph.putExtra("width", String.valueOf(width));
         mag_graph.putExtra("magnetization", String.valueOf(magnetization));
         mag_graph.putExtra("depth", String.valueOf(depth));

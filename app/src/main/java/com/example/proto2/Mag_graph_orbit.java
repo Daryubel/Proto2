@@ -34,19 +34,16 @@ public class Mag_graph_orbit extends AppCompatActivity {
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
     private ImageView drawImageView;
-    Double radius, magnetization, depth;
-    TextView xV, rV, MV, DV, Text14;
-    Integer length;
-
-    Integer meshLength = 60;
-    Integer meshDensity = 500/meshLength;
-
-    Double Is = pi/3;
-    Float A = (float) 0;
+    Double radius, magnetization, depth, Is;
+    TextView IV, rV, MV, DV, Text14;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
     LineChart OrbProfile;
+
+    Integer length = 500;
+    Integer meshLength = 60;
+    Integer meshDensity = 500/meshLength;
 
     int[] x, y= null;
     float[] za, ha = null;
@@ -87,18 +84,18 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
-        length = Integer.valueOf(getIntent().getStringExtra("xLength"));
+        Is = Double.valueOf(getIntent().getStringExtra("is"));
         radius = Double.valueOf(getIntent().getStringExtra("radius"));
         magnetization = Double.valueOf(getIntent().getStringExtra("magnetization"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
-        xV=(TextView)this.findViewById(R.id.textView9);
+        IV=(TextView)this.findViewById(R.id.textView9);
         rV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
         Text14=(TextView)this.findViewById(R.id.textView14);
 
-        xV.setText("x length:" + length);
+        IV.setText("inclination:" + Is);
         rV.setText("radius:" + String.valueOf(radius));
         MV.setText("magnetization:" + String.valueOf(magnetization));
         DV.setText("depth:" + String.valueOf(depth));
@@ -107,7 +104,6 @@ public class Mag_graph_orbit extends AppCompatActivity {
         bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
         contour2DMap = new Contour2DMap(bitmap,380,250);
         Log.d("MagOrbit","bitmap initialized");
-
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
         x = new int[length];
@@ -144,11 +140,6 @@ public class Mag_graph_orbit extends AppCompatActivity {
                 za2D[i][j] = ((mu*magnetization*((2*Math.pow(depth,2)-Math.pow(y[j],2)-
                         Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
                         /(4*pi*Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2)),2.5)));
-
-                   /////////////////////////////////////////////
-                   //// SOMETHING IS WRONG WITH THE FORMULA ////
-                   /////////////////////////////////////////////
-
             }
         }
         Log.d("MagOrbit","contour value initialized");

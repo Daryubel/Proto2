@@ -48,7 +48,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         value_o_Density=(EditText)view.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)view.findViewById(R.id.Textinput_o_Depth);
 
-        tv_length=(TextView)view.findViewById(R.id.textView4);
+        tv_length=(TextView)view.findViewById(R.id.Textinput_o_Is);
         tv_peak=(TextView)view.findViewById(R.id.textView6);
         barprogress=(TextView)view.findViewById(R.id.textView7);
         fieldLength=(TextView)view.findViewById(R.id.textView8);

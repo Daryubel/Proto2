@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Textinput_o_Is"
         android:layout_width="212dp"
         android:layout_height="19dp"
         android:layout_marginTop="4dp"
@@ -105,11 +105,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:text="Length:"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_Is"
+        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_Is"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/Textinput_o_Is"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -160,7 +160,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Is" />
 
     <SeekBar
         android:id="@+id/seekBar2"

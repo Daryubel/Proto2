@@ -87,10 +87,10 @@
         app:layout_constraintTop_toTopOf="@+id/Textinput_o_Depth"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="212dp"
-        android:layout_height="19dp"
+    <EditText
+        android:id="@+id/Textinput_o_Is"
+        android:layout_width="214dp"
+        android:layout_height="42dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="80dp"
         android:text="10"
@@ -103,14 +103,14 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:text="Length:"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintHorizontal_bias="0.454"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="5dp"
+        android:text="Inclination:"
+        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_Is"
+        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_Is"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/Textinput_o_Is"
+        app:layout_constraintVertical_bias="0.565" />
 
     <TextView
         android:id="@+id/textView"
@@ -160,7 +160,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Is" />
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -188,7 +188,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Length of field"
+        android:text="Magnetic Inclination Angle"
         app:layout_constraintEnd_toEndOf="@+id/seekBar2"
         app:layout_constraintStart_toStartOf="@+id/seekBar2"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />

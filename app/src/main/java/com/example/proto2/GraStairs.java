@@ -1,9 +1,7 @@
 package com.example.proto2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +47,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
         value_o_density=(EditText)view.findViewById(R.id.Textinput_o_density);
         value_o_Depth=(EditText)view.findViewById(R.id.Textinput_o_Depth);
 
-        tv_length=(TextView)view.findViewById(R.id.textView4);
+        tv_length=(TextView)view.findViewById(R.id.Textinput_o_Is);
         tv_central=(TextView)view.findViewById(R.id.textView6);
         barprogress=(TextView)view.findViewById(R.id.textView7);
         fieldLength=(TextView)view.findViewById(R.id.textView8);

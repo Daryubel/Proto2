@@ -30,11 +30,10 @@ public class Mag_graph_cylinder extends AppCompatActivity {
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
     private ImageView drawImageView;
-    Double radius, magnetization, depth;
-    TextView xV, rV, MV, DV;
-    Double Is = pi/3;
-    Integer length;
+    Double radius, magnetization, depth, Is;
+    TextView IV, rV, MV, DV;
 
+    Integer length = 500;
     Integer meshLength = 60;
     Integer meshDensity = 500/meshLength;
 
@@ -81,12 +80,12 @@ public class Mag_graph_cylinder extends AppCompatActivity {
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
-        length = Integer.valueOf(getIntent().getStringExtra("xLength"));
+        Is = Double.valueOf(getIntent().getStringExtra("is"));
         radius = Double.valueOf(getIntent().getStringExtra("radius"));
         magnetization = Double.valueOf(getIntent().getStringExtra("magnetization"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
-        xV=(TextView)this.findViewById(R.id.textView9);
+        IV=(TextView)this.findViewById(R.id.textView9);
         rV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
@@ -97,7 +96,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         contour2DMap = new Contour2DMap(bitmap,380,250);
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
-        xV.setText("x length:" + length);
+        IV.setText("inclination:" + Is);
         rV.setText("radius:" + String.valueOf(radius));
         MV.setText("magnetization:" + String.valueOf(magnetization));
         DV.setText("depth:" + String.valueOf(depth));

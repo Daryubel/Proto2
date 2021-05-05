@@ -33,15 +33,14 @@ public class Mag_graph_cuboid extends AppCompatActivity{
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi;
 
     private ImageView drawImageView;
-    Double width, magnetization, depth;
-    Double Is = pi/3;
-    TextView xV, bV, MV, DV;
-    Integer length;
+    Double width, magnetization, depth, Is;
+    TextView IV, bV, MV, DV;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
     LineChart OrbProfile;
 
+    Integer length = 500;
     Integer meshLength = 50;
     Integer meshDensity = 500/meshLength;
 
@@ -84,12 +83,12 @@ public class Mag_graph_cuboid extends AppCompatActivity{
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
-        length = Integer.valueOf(getIntent().getStringExtra("xLength"));
+        Is = Double.valueOf(getIntent().getStringExtra("is"));
         width = Double.valueOf(getIntent().getStringExtra("width"));
         magnetization = Double.valueOf(getIntent().getStringExtra("magnetization"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
 
-        xV=(TextView)this.findViewById(R.id.textView9);
+        IV=(TextView)this.findViewById(R.id.textView9);
         bV=(TextView)this.findViewById(R.id.textView10);
         MV=(TextView)this.findViewById(R.id.textView11);
         DV=(TextView)this.findViewById(R.id.textView12);
@@ -101,7 +100,7 @@ public class Mag_graph_cuboid extends AppCompatActivity{
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
 
-        xV.setText("x length:" + length);
+        IV.setText("inclination:" + Is);
         bV.setText("1/2 width:" + String.valueOf(width));
         MV.setText("magnetization:" + String.valueOf(magnetization));
         DV.setText("depth:" + String.valueOf(depth));
