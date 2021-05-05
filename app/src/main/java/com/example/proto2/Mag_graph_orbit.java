@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.muddzdev.quickshot.QuickShot;
 
 import org.w3c.dom.Text;
 
@@ -55,7 +56,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate( R.menu.operations , menu);
+        getMenuInflater().inflate(R.menu.operations , menu);
         return true;
     }
     @Override
@@ -64,11 +65,13 @@ public class Mag_graph_orbit extends AppCompatActivity {
         switch(item.getItemId())
         {
             case  R.id.JPG :
-//                QuickShot.of(OrbProfile).setResultListener(this).toJPG().save();
+                QuickShot.of(drawImageView).toJPG().save();
+                QuickShot.of(OrbProfile).toJPG().save();
                 Toast.makeText(this, "Saved as .jpg in /pictures.", Toast.LENGTH_SHORT).show();
                 break;
             case  R.id.PNG :
-//                QuickShot.of(OrbProfile).setResultListener(this).toPNG().save();
+                QuickShot.of(drawImageView).toJPG().save();
+                QuickShot.of(OrbProfile).toJPG().save();
                 Toast.makeText(this, "Saved as .png in /pictures.", Toast.LENGTH_SHORT).show();
                 break;
         }

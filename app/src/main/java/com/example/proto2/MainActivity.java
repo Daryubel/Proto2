@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate( R.menu.main , menu);
+        getMenuInflater().inflate(R.menu.main , menu);
         return true;
     }
 
@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onOptionsItemSelected(item);
         switch(item.getItemId())
         {
-            case  R.id.add_item :
-                Toast.makeText(this, "1st item clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.remove_item :
-                Toast.makeText(this, "2st item clicked", Toast.LENGTH_SHORT).show();
-                break;
+//            case  R.id.add_item :
+//                Toast.makeText(this, "1st item clicked", Toast.LENGTH_SHORT).show();
+//                break;
+//            case  R.id.remove_item :
+//                Toast.makeText(this, "2st item clicked", Toast.LENGTH_SHORT).show();
+//                break;
             case  R.id.about_app :
                 FAPDialog();
                 break;
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "OK clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "OK clicked", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Back clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Back clicked", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Neutral clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Neutral clicked", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

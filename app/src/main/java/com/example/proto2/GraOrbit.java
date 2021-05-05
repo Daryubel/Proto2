@@ -93,12 +93,12 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,12 +112,12 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Touching SeekBar", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Releasing SeekBar", Toast.LENGTH_SHORT).show();
             }
         });
     }
