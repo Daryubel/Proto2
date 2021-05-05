@@ -32,6 +32,8 @@ public class Gra_graph_stairs extends AppCompatActivity {
     TextView xV, hV, rV, DV;
     Integer length;
 
+    Integer meshLength = 15;
+    Integer meshDensity = 500/meshLength;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
@@ -114,14 +116,14 @@ public class Gra_graph_stairs extends AppCompatActivity {
                     ));
         }
 
-        g2D = new double[length][length];
-        for (int i=0; i<length; i++){
-            for (int j=0; j<length; j++){
+        g2D = new double[meshLength][meshLength];
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
                 g2D[i][j] = (G*density*(pi*(depth-height)+
-                                x[i]*Math.log((Math.pow(x[i],2)+Math.pow(depth,2))
-                                        /(Math.pow(x[i],2)+Math.pow(height,2)))+
-                                2*depth*Math.atan(x[i]/depth)-
-                                2*height*Math.atan(x[i]/height)));
+                                x[i*meshDensity]*Math.log((Math.pow(x[i*meshDensity],2)+Math.pow(depth,2))
+                                /(Math.pow(x[i*meshDensity],2)+Math.pow(height,2)))+
+                                2*depth*Math.atan(x[i*meshDensity]/depth)-
+                                2*height*Math.atan(x[i*meshDensity]/height)));
             }
         }
 
@@ -135,7 +137,7 @@ public class Gra_graph_stairs extends AppCompatActivity {
         contour2DMap.setData(g2D);
         contour2DMap.setIsoFactor(1);
         contour2DMap.setInterpolationFactor(1);
-        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
         Log.d("GraGraph","draw");
     }

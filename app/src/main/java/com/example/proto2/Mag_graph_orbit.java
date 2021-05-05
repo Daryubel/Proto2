@@ -34,7 +34,11 @@ public class Mag_graph_orbit extends AppCompatActivity {
     Double radius, magnetization, depth;
     TextView xV, rV, MV, DV;
     Integer length;
-    Float Is = (float) 90;
+
+    Integer meshLength = 15;
+    Integer meshDensity = 500/meshLength;
+
+    Double Is = pi/3;
     Float A = (float) 0;
 
     Contour2DMap contour2DMap;
@@ -98,6 +102,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
         drawImageView = findViewById(R.id.drawImageView);
         bitmap = Bitmap.createBitmap(380,250, Bitmap.Config.ARGB_8888);
         contour2DMap = new Contour2DMap(bitmap,380,250);
+        Log.d("MagOrbit","bitmap initialized");
 
         OrbProfile=(LineChart)this.findViewById(R.id.OrbitProfileLineChart1);
 
@@ -107,6 +112,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
             x[i] = -length/2 + i;
             y[i] = -length/2 + i;
         }
+        Log.d("MagOrbit","margin initialized");
 
         ha = new float[length];
         za = new float[length];
@@ -119,23 +125,32 @@ public class Mag_graph_orbit extends AppCompatActivity {
                     Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
                     /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2.5)));
         }
+        Log.d("MagOrbit","profile value initialized");
 
 
-        ha2D = new double[length][length];
-        za2D = new double[length][length];
-        for (int i=0; i<length; i++){
-            for (int j=0; j<length; j++){
+        ha2D = new double[meshLength][meshLength];
+        za2D = new double[meshLength][meshLength];
+        Log.d("MagOrbit","empty contour array initialized");
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
                 ha2D[i][j] = ((mu*magnetization*((2*Math.pow(x[i],2)-Math.pow(y[j],2)-
                         Math.pow(depth,2))*Math.cos(Is)-3*depth*x[i]*Math.sin(Is)))
-                        /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2),2.5)));
+                        /(4*pi*Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2)),2.5)));
                 za2D[i][j] = ((mu*magnetization*((2*Math.pow(depth,2)-Math.pow(y[j],2)-
                         Math.pow(x[i],2))*Math.sin(Is)-3*x[i]*depth*Math.cos(Is)))
-                        /(4*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2),2.5)));
+                        /(4*pi*Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)+Math.pow(y[j],2)),2.5)));
+
+                   /////////////////////////////////////////////
+                   //// SOMETHING IS WRONG WITH THE FORMULA ////
+                   /////////////////////////////////////////////
+
             }
         }
+        Log.d("MagOrbit","contour value initialized");
 
 
         DrawProfile();
+        Log.d("MagOrbit","Profile Drawn");
         DrawContour();
 
     }
@@ -143,10 +158,12 @@ public class Mag_graph_orbit extends AppCompatActivity {
 
     public void DrawContour(){
         contour2DMap.setData(ha2D);
+        Log.d("MagOrbit","Data set");
         contour2DMap.setIsoFactor(1);
         contour2DMap.setInterpolationFactor(1);
         contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
+        Log.d("MagOrbit","Image Drawn");
     }
 
     public void DrawProfile(){

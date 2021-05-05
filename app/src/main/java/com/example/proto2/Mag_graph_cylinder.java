@@ -32,8 +32,11 @@ public class Mag_graph_cylinder extends AppCompatActivity {
     private ImageView drawImageView;
     Double radius, magnetization, depth;
     TextView xV, rV, MV, DV;
-    Float Is = (float) 90;
+    Double Is = pi/3;
     Integer length;
+
+    Integer meshLength = 15;
+    Integer meshDensity = 500/meshLength;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
@@ -118,11 +121,11 @@ public class Mag_graph_cylinder extends AppCompatActivity {
                     /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2)));
         }
 
-        Ha2D = new double[length][length];
-        Za2D = new double[length][length];
+        Ha2D = new double[meshLength][meshLength];
+        Za2D = new double[meshLength][meshLength];
         Log.d("Contour", "2D data initialized");
-        for (int i=0; i<length; i++){
-            for (int j=0; j<length; j++){
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
                 Ha2D[i][j] = (mu*magnetization*((Math.pow(depth,2)-
                         Math.pow(x[i],2))*Math.cos(Is)+2*depth*x[i]*Math.sin(Is)))
                         /(2*pi*Math.pow(Math.pow(x[i],2)+Math.pow(depth,2),2));
@@ -144,7 +147,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         Log.d("Contour", "Data Set");
         contour2DMap.setIsoFactor(1);
         contour2DMap.setInterpolationFactor(1);
-        contour2DMap.setMapColorScale(ColorScale.MONOCHROMATIC);
+        contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
     }
 

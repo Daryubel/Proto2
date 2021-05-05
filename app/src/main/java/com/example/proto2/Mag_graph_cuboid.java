@@ -27,11 +27,14 @@ public class Mag_graph_cuboid extends AppCompatActivity{
     private final Double G = 6.67259*10, pi = Math.PI, mu = 4*pi*Math.pow(10,-7);
 
     Double width, magnetization, depth;
-    Float Is = (float) 90;
+    Double Is = pi/2;
     TextView xV, bV, MV, DV, IsV;
     SeekBar seekBarIs;
     Integer length;
     LineChart OrbProfile;
+
+    Integer meshLength = 15;
+    Integer meshDensity = 500/meshLength;
 
     int[] x= null;
     float[] ha = null;
@@ -113,7 +116,7 @@ public class Mag_graph_cuboid extends AppCompatActivity{
         seekBarIs.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Is = (float) progress;
+                Is = (double) progress;
                 IsV.setText("Magnetization inclination: " + progress + "/90");
                 DrawProfile();
             }

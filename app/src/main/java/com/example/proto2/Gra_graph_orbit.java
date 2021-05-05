@@ -40,6 +40,8 @@ public class Gra_graph_orbit extends AppCompatActivity {
     Integer length;
 
     Integer interval = 20;
+    Integer meshLength = 15;
+    Integer meshDensity = 500/meshLength;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
@@ -125,12 +127,13 @@ public class Gra_graph_orbit extends AppCompatActivity {
         }
         Log.d("GraGraph","g1D calculation completed");
 
-        g2D = new double[length][length];
+        g2D = new double[meshLength][meshLength];
         Log.d("GraGraph","g2D initialization completed");
-        for (int i=0; i<length; i++){
-            for (int j=0; j<length; j++){
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
                 g2D[i][j] = ((G*depth*4*pi*Math.pow(radius,3)/3)
-                        /Math.pow((Math.pow(x[i],2)+Math.pow(y[j],2)+Math.pow(depth,2)),1.5));
+                        /Math.pow((Math.pow(x[i*meshDensity],2)+
+                        Math.pow(y[j*meshDensity],2)+Math.pow(depth,2)),1.5));
             }
         }
         Log.d("GraGraph","g2D calculation completed");
@@ -146,7 +149,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
     public void DrawContour(){
         contour2DMap.setData(g2D);
         contour2DMap.setIsoFactor(1);
-        contour2DMap.setInterpolationFactor(1);
+        contour2DMap.setInterpolationFactor(2);
         contour2DMap.setMapColorScale(ColorScale.COLOR);
         contour2DMap.draw(drawImageView);
         Log.d("GraGraph","draw");

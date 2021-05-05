@@ -33,6 +33,9 @@ public class Gra_graph_cylinder extends AppCompatActivity {
     TextView xV, hV, rV, DV;
     Integer length;
 
+    Integer meshLength = 10;
+    Integer meshDensity = 500/meshLength;
+
     Contour2DMap contour2DMap;
     Bitmap bitmap;
     LineChart OrbProfile;
@@ -112,12 +115,12 @@ public class Gra_graph_cylinder extends AppCompatActivity {
         }
 
 
-        g2D = new double[length][length];
+        g2D = new double[meshLength][meshLength];
         Log.d("GraGraph","g2D initialization completed");
-        for (int i=0; i<length; i++){
-            for (int j=0; j<length; j++){
+        for (int i=0; i<meshLength; i++){
+            for (int j=0; j<meshLength; j++){
                 g2D[i][j] = ((2*G*remnant_density*depth)
-                        /(Math.pow(x[i],2)+Math.pow(depth,2)));
+                        /(Math.pow(x[i*meshDensity],2)+Math.pow(depth,2)));
             }
         }
 
