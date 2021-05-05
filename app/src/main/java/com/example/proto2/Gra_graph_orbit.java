@@ -37,11 +37,10 @@ public class Gra_graph_orbit extends AppCompatActivity {
     private ImageView drawImageView;
     Double radius, density, depth;
     TextView xV, rV, rhoV, DV, Text14;
-    Integer length;
+    Integer meshLength, meshDensity;
 
+    Integer length = 500;
     Integer interval = 20;
-    Integer meshLength = 15;
-    Integer meshDensity = 500/meshLength;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
@@ -85,7 +84,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
-        length = Integer.valueOf(getIntent().getStringExtra("xLength"));
+        meshLength = Integer.valueOf(getIntent().getStringExtra("meshLength"));
         radius = Double.valueOf(getIntent().getStringExtra("radius"));
         density = Double.valueOf(getIntent().getStringExtra("density"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
@@ -127,6 +126,8 @@ public class Gra_graph_orbit extends AppCompatActivity {
                                         /Math.pow((Math.pow(x[i],2)+Math.pow(depth,2)), 1.5));
         }
         Log.d("GraGraph","g1D calculation completed");
+
+        meshDensity = length/meshLength;
 
         g2D = new double[meshLength][meshLength];
         Log.d("GraGraph","g2D initialization completed");

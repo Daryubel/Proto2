@@ -25,7 +25,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
     Button calBtn, calBtn2;
     SeekBar seekBar, lengthBar;
     Double radius, density, depth;
-    Integer length;
+    Integer meshlength;
 
 
     public GraOrbit() {
@@ -59,7 +59,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
         lengthBar.setMin(10);
-        lengthBar.setMax(500);
+        lengthBar.setMax(30);
 //        lengthBar.incrementProgressBy(10);
 
         calBtn.setOnClickListener((View.OnClickListener) this);
@@ -105,9 +105,9 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         lengthBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar lengthBar, int progress, boolean fromUser) {
-                fieldLength.setText("Length: " + progress + "/500 ");
+                fieldLength.setText("Length: " + progress + "/30 ");
                 tv_length.setText(String.valueOf(progress));
-                length=Integer.valueOf(progress);
+                meshlength=Integer.valueOf(progress);
             }
 
             @Override
@@ -169,7 +169,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        Gra_graph.putExtra("xLength", String.valueOf(length));
+        Gra_graph.putExtra("meshLength", String.valueOf(meshlength));
         Gra_graph.putExtra("radius", String.valueOf(radius));
         Gra_graph.putExtra("density", String.valueOf(density));
         Gra_graph.putExtra("depth", String.valueOf(depth));

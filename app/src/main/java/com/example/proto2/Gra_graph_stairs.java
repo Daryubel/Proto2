@@ -30,10 +30,9 @@ public class Gra_graph_stairs extends AppCompatActivity {
     private ImageView drawImageView;
     Double height, density, depth;
     TextView xV, hV, rV, DV;
-    Integer length;
+    Integer meshLength, meshDensity;
 
-    Integer meshLength = 15;
-    Integer meshDensity = 500/meshLength;
+    Integer length = 500;
 
     Contour2DMap contour2DMap;
     Bitmap bitmap;
@@ -77,7 +76,7 @@ public class Gra_graph_stairs extends AppCompatActivity {
 
         //receiving values via getStringExtra(). likewise the received values are String type and
         //should be converted into intended type before utilized.
-        length = Integer.valueOf(getIntent().getStringExtra("xLength"));
+        meshLength = Integer.valueOf(getIntent().getStringExtra("meshLength"));
         height = Double.valueOf(getIntent().getStringExtra("height"));
         density = Double.valueOf(getIntent().getStringExtra("density"));
         depth = Double.valueOf(getIntent().getStringExtra("depth"));
@@ -115,6 +114,8 @@ public class Gra_graph_stairs extends AppCompatActivity {
                            2*height*Math.atan(x[i]/height)
                     ));
         }
+
+        meshDensity = length/meshLength;
 
         g2D = new double[meshLength][meshLength];
         for (int i=0; i<meshLength; i++){

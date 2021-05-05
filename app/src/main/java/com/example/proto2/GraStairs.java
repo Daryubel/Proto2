@@ -25,7 +25,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
     Button calBtn5, calBtn6;
     SeekBar seekBar, lengthBar;
     Double height, density, depth;
-    Integer length;
+    Integer meshlength;
 
     public GraStairs() {
         // Required empty public constructor
@@ -58,7 +58,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
 
         lengthBar = (SeekBar)view.findViewById(R.id.seekBar2);
         lengthBar.setMin(10);
-        lengthBar.setMax(500);
+        lengthBar.setMax(50);
 
         calBtn5.setOnClickListener((View.OnClickListener) this);
         calBtn6.setOnClickListener((View.OnClickListener) this);
@@ -106,7 +106,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
             public void onProgressChanged(SeekBar lengthBar, int progress, boolean fromUser) {
                 fieldLength.setText("Length: " + progress + "/500 ");
                 tv_length.setText(String.valueOf(progress));
-                length=Integer.valueOf(progress);
+                meshlength=Integer.valueOf(progress);
             }
 
             @Override
@@ -170,7 +170,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
 
         //putExtra() applies ONLY to String type and therefore the double or integer type must
         //first be converted into String type if wished to be transmitted amongst activities.
-        gra_graph.putExtra("xLength", String.valueOf(length));
+        gra_graph.putExtra("meshLength", String.valueOf(meshlength));
         gra_graph.putExtra("height", String.valueOf(height));
         gra_graph.putExtra("density", String.valueOf(density));
         gra_graph.putExtra("depth", String.valueOf(depth));
