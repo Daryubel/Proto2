@@ -3,6 +3,7 @@ package com.example.proto2;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,15 +15,20 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 public class MagOrbit extends Fragment implements View.OnClickListener{
 
     private final Double G = 6.67259*10, pi = 3.14159, mu = 4*pi*Math.pow(10,-7);
 
     View view = null;
+    SharedPreferences sp;
 
     TextView tv_peak, tv_length, barprogress;
     EditText value_o_Radius,value_o_magnetization,value_o_Depth, value_o_Is;
-    Button calBtn3, calBtn4;
+    String inputText1, inputText2, inputText3, inputText4;
+    Button calBtn4;
     SeekBar depthBar, angleBar;
     Double radius, magnetization, depth, Is;
     Integer length;
@@ -34,12 +40,16 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        sp = getActivity().getSharedPreferences("config", 0);
+
         // Inflate the layout for this fragment
         if (view == null) {
             view = inflater.inflate(R.layout.activity_mag_orbit, container, false);
         }
 
-        calBtn3=(Button)view.findViewById(R.id.calButton5);
+        FABInitialization();
+
         calBtn4=(Button)view.findViewById(R.id.calButton6);
 
         value_o_Radius=(EditText)view.findViewById(R.id.Textinput_o_width);
@@ -59,7 +69,6 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
         angleBar.setMin(0);
         angleBar.setMax(90);
 
-        calBtn3.setOnClickListener(this);
         calBtn4.setOnClickListener(this);
 
         barTracking();
@@ -117,9 +126,6 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.calButton5:
-                calculate();           // Show some vital values
-                break;
             case R.id.calButton6:
                 DrawGraph();       // Show the charts
                 break;
@@ -156,6 +162,56 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
         Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
         tv_peak.setText(Peak);
         Toast.makeText(getContext(), "Calculation Complete", Toast.LENGTH_SHORT).show();
+    }
+
+    public void FABInitialization()
+    {
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu)view.findViewById(R.id.multiple_actions);
+        final FloatingActionButton actionA = (FloatingActionButton)view.findViewById(R.id.action_a);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                actionA.setTitle("Action A clicked");
+                SaveConfigs();
+            }
+        });
+        final FloatingActionButton actionB = (FloatingActionButton)view.findViewById(R.id.action_b);
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                actionB.setTitle("Action B clicked");
+                CallConfigs();
+            }
+        });
+    }
+
+    public void SaveConfigs()
+    {
+        SharedPreferences.Editor edit = sp.edit();
+
+        edit.putString("RADIUS", value_o_Radius.toString());
+        edit.putString("MAGNET", value_o_magnetization.toString());
+        edit.putString("DEPTH", value_o_Depth.toString());
+        edit.putString("INCLIN", value_o_Is.toString());
+
+        edit.commit();
+
+        Toast.makeText(getActivity(),"Configuration Saved", Toast.LENGTH_LONG).show();
+    }
+
+    public void CallConfigs()
+    {
+        inputText1 = sp.getString("RADIUS","");
+        inputText2 = sp.getString("MAGNET","");
+        inputText3 = sp.getString("DEPTH","");
+        inputText4 = sp.getString("INCLIN","");
+
+        value_o_Radius.setText(inputText1);
+        value_o_magnetization.setText(inputText2);
+        value_o_Depth.setText(inputText3);
+        value_o_Is.setText(inputText4);
+
+        Toast.makeText(getActivity(),"Configuration Loaded", Toast.LENGTH_LONG).show();
     }
 
     public void DrawGraph()

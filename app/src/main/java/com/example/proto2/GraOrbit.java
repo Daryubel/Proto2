@@ -1,6 +1,7 @@
 package com.example.proto2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,15 +15,20 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 public class GraOrbit extends Fragment implements View.OnClickListener{
 
     private Double G = 6.67259*10, pi = 3.14159;
 
     View view = null;
+    SharedPreferences sp;
 
     TextView tv_peak, tv_length, barprogress, fieldLength;;
     EditText value_o_Radius,value_o_Density,value_o_Depth;
-    Button calBtn, calBtn2;
+    String inputText1, inputText2, inputText3;
+    Button calBtn2;
     SeekBar seekBar, lengthBar;
     Double radius, density, depth;
     Integer meshlength;
@@ -35,13 +41,16 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        sp = getActivity().getSharedPreferences("config", 0);
+
         // Inflate the layout for this fragment
         if (view == null) {
             view = inflater.inflate(R.layout.activity_gra_orbit, container, false);
         }
 
+        FABInitialization();
 
-        calBtn=(Button)view.findViewById(R.id.calButton5);
         calBtn2=(Button)view.findViewById(R.id.calButton6);
 
         value_o_Radius=(EditText)view.findViewById(R.id.Textinput_o_width);
@@ -62,7 +71,6 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         lengthBar.setMax(30);
 //        lengthBar.incrementProgressBy(10);
 
-        calBtn.setOnClickListener((View.OnClickListener) this);
         calBtn2.setOnClickListener((View.OnClickListener) this);
 
         barTracking();
@@ -79,9 +87,6 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
     }
 
 
-
-
-    //Void, just a function running background and is started in Protected void onCreate
     private void barTracking()
     {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -125,9 +130,6 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
     public void onClick(View v)
     {
         switch (v.getId()) {
-            case R.id.calButton5:
-                calculate();           // Show some vital values
-                break;
             case R.id.calButton6:
                 DrawGraph();       // Show the charts
                 break;
@@ -144,9 +146,9 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
     public void calculate()
     {
-        String inputText1=value_o_Radius.getText().toString();  //Convert
-        String inputText2=value_o_Density.getText().toString();
-        String inputText3=value_o_Depth.getText().toString();
+        inputText1=value_o_Radius.getText().toString();  //Convert
+        inputText2=value_o_Density.getText().toString();
+        inputText3=value_o_Depth.getText().toString();
         Double out_o_peak;
         String Peak;
 
@@ -159,6 +161,54 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
         Peak=String.valueOf(out_o_peak);   //Convert integer to String. Works for all types of values.
         tv_peak.setText(Peak);
         Toast.makeText(getContext(), "Calculation Complete", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void FABInitialization()
+    {
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu)view.findViewById(R.id.multiple_actions);
+        final FloatingActionButton actionA = (FloatingActionButton)view.findViewById(R.id.action_a);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                actionA.setTitle("Action A clicked");
+                SaveConfigs();
+            }
+        });
+        final FloatingActionButton actionB = (FloatingActionButton)view.findViewById(R.id.action_b);
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                actionB.setTitle("Action B clicked");
+                CallConfigs();
+            }
+        });
+    }
+
+    public void SaveConfigs()
+    {
+        SharedPreferences.Editor edit = sp.edit();
+
+        edit.putString("RADIUS", value_o_Radius.toString());
+        edit.putString("DENSIT", value_o_Density.toString());
+        edit.putString("DEPTH", value_o_Depth.toString());
+
+        edit.commit();
+
+        Toast.makeText(getActivity(),"Configuration Saved", Toast.LENGTH_LONG).show();
+    }
+
+    public void CallConfigs()
+    {
+        inputText1 = sp.getString("RADIUS","");
+        inputText2 = sp.getString("DENSIT","");
+        inputText3 = sp.getString("DEPTH","");
+
+        value_o_Radius.setText(inputText1);
+        value_o_Density.setText(inputText2);
+        value_o_Depth.setText(inputText3);
+
+        Toast.makeText(getActivity(),"Configuration Loaded", Toast.LENGTH_LONG).show();
     }
 
     public void DrawGraph()

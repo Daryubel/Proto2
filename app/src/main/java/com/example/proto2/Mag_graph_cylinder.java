@@ -51,7 +51,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate( R.menu.operations , menu);
+        getMenuInflater().inflate(R.menu.operations , menu);
         return true;
     }
     @Override
@@ -141,6 +141,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         Log.d("Contour", "Contour completed");
     }
 
+    //this implementation DO NOT support values smaller than 10e-2
     public void DrawContour(){
         contour2DMap.setData(Ha2D);
         Log.d("Contour", "Data Set");

@@ -24,34 +24,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gravityNav=(Button)this.findViewById(R.id.gravityBtn);
-        magneticNav=(Button)this.findViewById(R.id.magneticBtn);
+        gravityNav = (Button) this.findViewById(R.id.gravityBtn);
+        magneticNav = (Button) this.findViewById(R.id.magneticBtn);
 //        DiaFAP= (FloatingActionButton) this.findViewById(R.id.floatingActionButton);
 
-        gravityNav.setOnClickListener((View.OnClickListener)this);
-        magneticNav.setOnClickListener((View.OnClickListener)this);
+        gravityNav.setOnClickListener((View.OnClickListener) this);
+        magneticNav.setOnClickListener((View.OnClickListener) this);
 //        DiaFAP.setOnClickListener((View.OnClickListener)this);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.main , menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
 //            case  R.id.add_item :
 //                Toast.makeText(this, "1st item clicked", Toast.LENGTH_SHORT).show();
 //                break;
 //            case  R.id.remove_item :
 //                Toast.makeText(this, "2st item clicked", Toast.LENGTH_SHORT).show();
 //                break;
-            case  R.id.about_app :
+            case R.id.about_app:
                 FAPDialog();
                 break;
         }
@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.gravityBtn:
                 gotoGravityMain();                //"GRAVITY" btn
@@ -83,12 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-
-
-    public void FAPDialog()
-    {
+    public void FAPDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("About this app");
         builder.setMessage("Proto app v0.1 by DarYubel");
@@ -122,13 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         dialog.show();                              //显示对话框
     }
-    public void gotoGravityMain()
-    {
+
+    public void gotoGravityMain() {
         Intent GraMain = new Intent(MainActivity.this, GraHome.class);
         startActivity(GraMain);
     }
-    public void gotoMagneticMain()
-    {
+
+    public void gotoMagneticMain() {
         Intent MagMain = new Intent(MainActivity.this, MagHome.class);
         startActivity(MagMain);
     }

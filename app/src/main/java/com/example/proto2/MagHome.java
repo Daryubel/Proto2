@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -80,4 +83,6 @@ public class MagHome extends AppCompatActivity {
             return mFragmentTittleList.get(position);
         }
     }
+
+
 }

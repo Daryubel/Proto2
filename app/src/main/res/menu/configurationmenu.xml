@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/SAVE"
+        android:title="Save current configurations" />
+
+    <item
+        android:id="@+id/LOAD"
+        android:title="Load last configurations" />
+
+</menu>
