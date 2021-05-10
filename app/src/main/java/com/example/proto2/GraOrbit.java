@@ -213,6 +213,7 @@ public class GraOrbit extends Fragment implements View.OnClickListener{
 
     public void DrawGraph()
     {
+        Log.d("benchmark", "BEGIN");
         calculate();
         Intent Gra_graph = new Intent(getActivity(), Gra_graph_orbit.class);
 

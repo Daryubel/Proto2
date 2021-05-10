@@ -139,6 +139,7 @@ public class Mag_graph_cylinder extends AppCompatActivity {
         Log.d("Contour", "Profile completed");
         DrawContour();
         Log.d("Contour", "Contour completed");
+        Log.d("benchmark", "END");
     }
 
     //this implementation DO NOT support values smaller than 10e-2

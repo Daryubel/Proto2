@@ -152,6 +152,7 @@ public class Mag_graph_orbit extends AppCompatActivity {
         Log.d("MagOrbit","Profile Drawn");
 //        Text14.setText(Arrays.deepToString(ha2D));
         DrawContour();
+        Log.d("benchmark", "END");
 
     }
 

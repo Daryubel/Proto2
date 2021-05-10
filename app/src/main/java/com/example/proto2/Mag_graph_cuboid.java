@@ -142,6 +142,7 @@ public class Mag_graph_cuboid extends AppCompatActivity{
         DrawProfile();
         Toast.makeText(this,String.valueOf(Ha2D[10][10]),Toast.LENGTH_LONG).show();
         DrawContour();
+        Log.d("benchmark", "END");
 
     }
 

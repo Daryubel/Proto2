@@ -219,6 +219,7 @@ public class GraStairs extends Fragment implements View.OnClickListener{
 
     public void DrawGraph()
     {
+        Log.d("benchmark", "BEGIN");
         calculate();
         Intent gra_graph = new Intent(getActivity(), Gra_graph_stairs.class);
 

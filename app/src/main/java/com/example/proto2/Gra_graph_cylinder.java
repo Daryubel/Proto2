@@ -127,6 +127,7 @@ public class Gra_graph_cylinder extends AppCompatActivity {
 
         DrawProfile();
         DrawContour();
+        Log.d("benchmark", "END");
 
     }
 

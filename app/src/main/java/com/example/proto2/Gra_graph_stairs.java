@@ -131,6 +131,7 @@ public class Gra_graph_stairs extends AppCompatActivity {
 
         DrawProfile();
         DrawContour();
+        Log.d("benchmark", "END");
 
     }
 

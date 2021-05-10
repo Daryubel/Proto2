@@ -144,6 +144,7 @@ public class Gra_graph_orbit extends AppCompatActivity {
         DrawProfile();
 //        Text14.setText(Arrays.deepToString(g2D));
         DrawContour();
+        Log.d("benchmark", "END");
 
     }
 

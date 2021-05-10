@@ -216,6 +216,7 @@ public class MagOrbit extends Fragment implements View.OnClickListener{
 
     public void DrawGraph()
     {
+        Log.d("benchmark", "BEGIN");
         calculate();
         Intent mag_graph = new Intent(getActivity(), Mag_graph_orbit.class);
 
