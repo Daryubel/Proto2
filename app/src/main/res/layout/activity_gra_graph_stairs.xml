@@ -8,77 +8,64 @@
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/OrbitProfileLineChart1"
-        android:layout_width="399dp"
-        android:layout_height="272dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="327dp"
+        android:layout_width="400dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="6dp"
         android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/drawImageView"
-        android:layout_width="380dp"
+        android:layout_width="400dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginTop="6dp"
         android:contentDescription="image"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="236dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/drawImageView" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView12" />
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="236dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/OrbitProfileLineChart1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawImageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

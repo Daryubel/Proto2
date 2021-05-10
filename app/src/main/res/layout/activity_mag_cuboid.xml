@@ -7,113 +7,124 @@
     android:layout_height="match_parent"
     tools:context=".MagCuboid">
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="188dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="16dp"
+        android:text="Parameter Settings"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        fab:layout_constraintEnd_toEndOf="parent"
+        fab:layout_constraintStart_toStartOf="parent"
+        fab:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/calButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="16dp"
         android:text="GRAPH"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/Textinput_o_Depth"
-        android:layout_width="213dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="80dp"
-        android:text="5"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_density" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="4dp"
-        android:text="Magnetization: "
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_density"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_density"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_density"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
     <EditText
         android:id="@+id/Textinput_o_width"
-        android:layout_width="213dp"
+        android:layout_width="250dp"
         android:layout_height="34dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="8dp"
         android:text="30"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/Textinput_o_density"
-        android:layout_width="213dp"
+        android:layout_width="250dp"
         android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="8dp"
         android:text="20"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_width" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:text="Depth:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_Depth"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_Depth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_Depth"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/Textinput_o_Is"
-        android:layout_width="215dp"
+        android:layout_width="250dp"
         android:layout_height="36dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="8dp"
         android:text="30"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Depth" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="11dp"
-        android:text="Inclination:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_Is"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_Is"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        android:text="Magnetization Inclination Angle(of the plate) [degree] :"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_Is"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Magnetization Strength(of the plate) [T] :"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_width" />
+
+    <EditText
+        android:id="@+id/Textinput_o_Depth"
+        android:layout_width="250dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:text="5"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Depth(of the plate) [m] :"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_density" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:text="Width:"
-        app:layout_constraintBottom_toBottomOf="@+id/Textinput_o_width"
-        app:layout_constraintEnd_toStartOf="@+id/Textinput_o_width"
+        android:layout_marginTop="24dp"
+        android:text="Width(of the plate)[m]:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Textinput_o_width"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/textView5"
@@ -143,46 +154,45 @@
 
     <SeekBar
         android:id="@+id/seekBar1"
-        android:layout_width="299dp"
+        android:layout_width="240dp"
         android:layout_height="23dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="65dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Is" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Depth" />
 
     <SeekBar
         android:id="@+id/seekBar2"
-        android:layout_width="299dp"
+        android:layout_width="240dp"
         android:layout_height="23dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="65dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Is" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="4dp"
         android:text="Depth of anamoly"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar1"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/seekBar1"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar1" />
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar1"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar1" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Magnetic inclination angle"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar2"
-        app:layout_constraintStart_toStartOf="@+id/seekBar2"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="4dp"
+        android:text="Inclination Angle"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar2"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar2" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"
@@ -191,13 +201,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textinput_o_Is"
         fab:fab_addButtonColorNormal="@color/purple_500"
         fab:fab_addButtonColorPressed="@color/purple_700"
         fab:fab_addButtonPlusIconColor="@color/half_black"
