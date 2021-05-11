@@ -5,9 +5,9 @@
 <!--        android:id="@+id/add_item"-->
 <!--        android:title="Add" />-->
 
-<!--    <item-->
-<!--        android:id="@+id/remove_item"-->
-<!--        android:title="Remove" />-->
+    <item
+        android:id="@+id/remove_item"
+        android:title="Instructions" />
 
     <item
         android:id="@+id/about_app"

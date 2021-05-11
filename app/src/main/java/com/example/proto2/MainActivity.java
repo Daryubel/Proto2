@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            case  R.id.add_item :
 //                Toast.makeText(this, "1st item clicked", Toast.LENGTH_SHORT).show();
 //                break;
-//            case  R.id.remove_item :
-//                Toast.makeText(this, "2st item clicked", Toast.LENGTH_SHORT).show();
-//                break;
+            case  R.id.remove_item :
+                gotoInstructions();
+                break;
             case R.id.about_app:
                 FAPDialog();
                 break;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void FAPDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("About this app");
-        builder.setMessage("Proto app v0.1 by DarYubel");
+        builder.setMessage(R.string.main_content);
 //        builder.setIcon(R.mipmap.ic_launcher);
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -96,21 +96,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         //设置反面按钮
-        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(MainActivity.this, "Back clicked", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+//        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+////                Toast.makeText(MainActivity.this, "Back clicked", Toast.LENGTH_SHORT).show();
+//                dialog.dismiss();
+//            }
+//        });
         //设置中立按钮
-        builder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(MainActivity.this, "Neutral clicked", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+//        builder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+////                Toast.makeText(MainActivity.this, "Neutral clicked", Toast.LENGTH_SHORT).show();
+//                dialog.dismiss();
+//            }
+//        });
 
         AlertDialog dialog = builder.create();
 
@@ -125,6 +125,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void gotoMagneticMain() {
         Intent MagMain = new Intent(MainActivity.this, MagHome.class);
         startActivity(MagMain);
+    }
+
+    public void gotoInstructions() {
+        Intent Instruct = new Intent(MainActivity.this, InstructionPage.class);
+        startActivity(Instruct);
     }
 
 }
