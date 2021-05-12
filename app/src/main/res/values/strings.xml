@@ -95,4 +95,29 @@
         "\n    See more at the <a href="https://github.com/Daryubel/Proto2">GitHub site</a> of the app."
 
     </string>
+    <string name="what_is_this_app_for">
+        "    This is an application specified for non-geophysical prospecting personnel to have a "
+        "clear and fast way to recognize how some of the typical anomaly models creates their "
+        "gravitational or magnetic field. It provides easy-to-understand graphing tools, which "
+        "include profile curves and 2D contours. For some quick validation circumstances, it also "
+        "offers quantified solutions to certain objects."
+    </string>
+    <string name="graph">
+        "    To graph, you must first navigate to the parameter setting panel, as the following "
+        "picture shows, where Orbit model is the demonstrative case."
+        "picture here"
+        "    All parameters have default values built in. Still, it's not recommended to use the default "
+        "settings to proceed, as this may cause instabilities. "
+        "\n    Each model comes with its unique parameters, therefore the user must adjust them "
+        "according to specific circumstances. For example, for the Orbit model here, the picture above "
+        "shows that the radius of the orbit is 5 meters, the density of the orbit is 10 kilograms per "
+        "m^3, the depth of the orbit is 20 meters, and the mesh grid on which the contour will be drawn "
+        "is 20 by 20. "
+        "\n    Be advised that the recommended mesh grid length should not exceed 50 units, for it may "
+        "cause serious performance issues."
+    </string>
+    <string name="settings">
+        ""
+    </string>
+
 </resources>
